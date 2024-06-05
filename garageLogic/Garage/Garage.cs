@@ -6,7 +6,7 @@ namespace Garage {
     
     internal class Garage {
         private Dictionary<string, GarageEntry> GarageEntries {get; set; }= new Dictionary<string, GarageEntry>();
-        
+
         public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
             if ( isVehicleExists(i_AddVehicleInput.i_LicensePlate) ) 
             {
@@ -39,7 +39,7 @@ namespace Garage {
 
         public void InflateWheelsToMax(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle.InflateWheelsToMax();
 
-        public void SupplyMaxEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyMaxEnergy(i_FuelType, i_AmountToAdd);
+        public void SupplyMaxEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
    
         public Vehicle GetVehicleByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle;
     }

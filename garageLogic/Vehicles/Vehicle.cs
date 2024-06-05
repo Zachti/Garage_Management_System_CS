@@ -18,9 +18,9 @@ namespace Garage
             }
         }
     
-        public void SupplyMaxEnergy(eFuelType? i_FuelType, float i_AmountToAdd) {
-            Engine.SupplyMaxEnergy(i_AmountToAdd, i_FuelType);
-            LeftEnergyPercentage = 100;
+        public void SupplyEnergy(eFuelType? i_FuelType, float i_AmountToAdd) {
+            Engine.SupplyEnergy(i_AmountToAdd, i_FuelType);
+            LeftEnergyPercentage = Engine.getLeftEnergyPercentage();
         }
     }
 }
