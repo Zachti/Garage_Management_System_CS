@@ -104,8 +104,6 @@ namespace Garage {
             }
         }
     
-        public static string GetInputOrEmpty() {
-            return Console.ReadLine() ?? string.Empty;
-        }
+        public static string GetInputOrEmpty() => Console.ReadLine() ?? string.Empty;
     }
 }   
