@@ -2,8 +2,12 @@ namespace Garage {
     
     internal record VehicleFilter(eCarStatus i_CarStatus);
 
-    internal record AddVehicleInput(Owner i_Owner, eSupportVehicles i_SelectedVehicleType, string i_LicensePlate, string i_Model, List<Wheel> i_Wheels, eMotorLicenseType? i_LicenseType, int? i_EngineVolume, eCarColors? i_Color, int? i_NumberOfDoors, bool? i_IsCarryingDangerousMaterials, float? i_CargoVolume);
+    internal record AddVehicleInput(VehicleData VehicleData, eSupportVehicles i_SelectedVehicleType, string i_LicensePlate);
     
+    internal record BasicVehicleData(Engine Engine, List<Wheel> Wheels, Owner Owner, string Model);
+
+    internal record VehicleData(BasicVehicleData BasicVehicleData, eCarColors? CarColor, eCarNumberOfDoors? numberOfDoors, eMotorLicenseType? MotorLicenseType,int? i_EngineVolume, bool? IsCarryingDangerousMaterials, float? CargoVolume);
+
     internal class Garage {
         private Dictionary<string, GarageEntry> GarageEntries {get; set; } = [];
 
