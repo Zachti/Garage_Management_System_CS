@@ -1,4 +1,5 @@
 namespace Garage {
+    
     internal abstract class Engine(float i_MaxCapacity) {
         protected float MaxCapacity { get; } = i_MaxCapacity;
         protected float CurrentCapacity { get; set; }
@@ -11,6 +12,8 @@ namespace Garage {
 
         public abstract void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType);
 
-        public float getLeftEnergyPercentage() => CurrentCapacity / MaxCapacity * 100;
+        public float getLeftEnergyPercentage() => CurrentCapacity / MaxCapacity * 100f;
+
+        public abstract override string ToString();
     }
 }

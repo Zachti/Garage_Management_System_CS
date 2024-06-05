@@ -22,5 +22,26 @@ namespace Garage
             Engine.SupplyEnergy(i_AmountToAdd, i_FuelType);
             LeftEnergyPercentage = Engine.getLeftEnergyPercentage();
         }
+
+        public string VehicleDetails()
+        {
+            string result;
+
+            result = string.Format(
+                @"Vehicel license plate: {0}
+                Vehicel model name: {1}
+                Wheels information: 
+                {2}
+                Energy meter: {3}%
+                {4}",
+                LicensePlate,
+                Model,
+                Wheels[0].ToString(),
+                LeftEnergyPercentage,
+                Engine.ToString());
+                return result;         
+        }
+
+        public abstract override string ToString();
     }
 }

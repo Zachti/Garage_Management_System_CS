@@ -19,5 +19,15 @@ namespace Garage
         private bool isInflateImpossible(float i_PressureToAdd) => Pressure + i_PressureToAdd > MaxPressure;
 
         public void InflateToMax() => Pressure = MaxPressure;
+
+        public override string ToString()
+        {
+            return string.Format(
+                @"Wheel manufacturer: {0}
+                Air pressure: {1}
+                ",
+                Manufacturer,
+                Pressure);
+        }
     }
 }
