@@ -4,12 +4,14 @@ namespace Garage {
 
     internal class UIManager(Garage i_Garage) {
         private Garage Garage { get; } = i_Garage;
+        private bool IsUserWantToExit { get; set; }
 
         public void Start() {
-            printMainMenu();
-            eMainMenuOptions userChoice = (eMainMenuOptions)Utilities.GetSingleDigit();
-            executeChoice(userChoice);
-
+            while (!IsUserWantToExit) {
+                printMainMenu();
+                eMainMenuOptions userChoice = (eMainMenuOptions)Utilities.GetSingleDigit();
+                executeChoice(userChoice);
+            }
         }
 
         private static void printMainMenu() =>
@@ -159,6 +161,7 @@ namespace Garage {
     
         private void handleGarageExit() {
             Console.WriteLine("Goodbye!");
+            IsUserWantToExit = true;
         }
     
         private VehicleInputTransformer getVehicleInputTransformer(out eSupportVehicles o_VehicleType) {
