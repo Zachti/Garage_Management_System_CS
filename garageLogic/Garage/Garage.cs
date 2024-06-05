@@ -16,12 +16,12 @@ namespace Garage {
 
         private bool isVehicleExists(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     
-        private void changeCarStatusToInRepair(string i_LicensePlate) => GarageEntries[i_LicensePlate].Status = eCarStatus.InRepair;
+        private void changeCarStatusToInRepair(string i_LicensePlate) => ChangeCarStatus(i_LicensePlate, eCarStatus.InRepair);
 
         private void addNewVehicle(AddVehicleInput i_AddVehicleInput) {
             BasicVehicleData basicVehicleData = i_AddVehicleInput.i_VehicleData.i_BasicVehicleData;
             VehicleData extendedVehicleData = i_AddVehicleInput.i_VehicleData;
-            Vehicle vehicle = VehicleFactory.CreateVehicle(i_AddVehicleInput.i_SelectedVehicleType, basicVehicleData.i_Model, i_AddVehicleInput.i_LicensePlate, basicVehicleData.i_Wheels, extendedVehicleData.i_MotorLicenseType, extendedVehicleData.i_EngineVolume, extendedVehicleData.i_CarColor, extendedVehicleData.i_NumberOfDoors, extendedVehicleData.i_IsCarryingDangerousMaterials, extendedVehicleData.i_CargoVolume);
+            Vehicle vehicle = VehicleFactory.CreateVehicle(i_AddVehicleInput.i_SelectedVehicleType, i_AddVehicleInput.i_LicensePlate, basicVehicleData.i_Model, basicVehicleData.i_Wheels,basicVehicleData.i_Engine, extendedVehicleData.i_MotorLicenseType, extendedVehicleData.i_EngineVolume, extendedVehicleData.i_CarColor, extendedVehicleData.i_NumberOfDoors, extendedVehicleData.i_IsCarryingDangerousMaterials, extendedVehicleData.i_CargoVolume);
             GarageEntries.Add(i_AddVehicleInput.i_LicensePlate, new GarageEntry(new CreateGarageEntryInput(vehicle, basicVehicleData.i_Owner)));
         }
     
@@ -33,16 +33,16 @@ namespace Garage {
                 .ToList();
         }
     
-        public void ChangeCarStatus(string i_LicensePlate, eCarStatus i_NewStatus) => GarageEntries[i_LicensePlate].Status = i_NewStatus;
+        public void ChangeCarStatus(string i_LicensePlate, eCarStatus i_NewStatus) {
+            GarageEntry entry = GarageEntries[i_LicensePlate];
+            entry.CheckEqualStatus(i_NewStatus);
+            entry.Status = i_NewStatus;
+        }
 
         public void InflateWheelsToMax(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle.InflateWheelsToMax();
 
         public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
    
-        public string GetVehicleInfoByLicensePlate(string i_LicensePlate)
-        {
-            GarageEntry entry = GarageEntries[i_LicensePlate];
-            return string.Format("{0}\nVehicle repairing state: {1}\n{2}", entry.Owner.ToString(), entry.Status, entry.Vehicle.ToString());
-        } 
+        public string GetVehicleInfoByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].ToString();
     }
 }

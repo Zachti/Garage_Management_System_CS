@@ -4,6 +4,10 @@ namespace Garage {
         public string Name { get; set; } = i_Name;
         public string PhoneNumber { get; set; } = i_PhoneNumber;
 
-        public override readonly string ToString() => $"Owner name: {Name}";
+        public override readonly string ToString() => string.Format(
+        @"Owner name: {0}
+        Owner phone: {1}",
+        Name,
+        PhoneNumber);
     }
 }
