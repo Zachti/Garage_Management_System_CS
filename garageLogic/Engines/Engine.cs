@@ -14,6 +14,15 @@ namespace Garage {
 
         public float getLeftEnergyPercentage() => CurrentCapacity / MaxCapacity * 100f;
 
+        protected void EnsureEnergySupplyIsValid(float i_AmountToAdd) {
+            if (isSupplyEnergyImpossible(i_AmountToAdd)) {
+                Exception ex = new Exception("Cannot recharge more than the maximum possible capacity");
+                throw new ValueOutOfRangeException(ex, 0, getMaxCapacityPossible());
+            }
+        }
+
+        private bool isSupplyEnergyImpossible(float i_AmountToAdd) => i_AmountToAdd + GetCurrentCapacity() > GetMaxCapacity();
+
         public abstract override string ToString();
     }
 }
