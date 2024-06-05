@@ -32,20 +32,11 @@ namespace Garage {
         {
             string strNumber = Console.ReadLine() ?? string.Empty;
 
-            bool isUserQuit = strNumber == "Q";
-
             int strLength = strNumber.Length;
 
-            if (!isUserQuit &&(strLength < i_MinNumOfDigits || strLength > i_MaxNumOfDigits))
-            {
-                throw new ValueOutOfRangeException(
-                    new Exception("Invalid input, please try again"),
-                    i_MinNumOfDigits,
-                    i_MaxNumOfDigits
-                );
-            }
+            validateNumberInRange(strLength, i_MinNumOfDigits, i_MaxNumOfDigits);
 
-            if (!strNumber.All(char.IsDigit) && !isUserQuit)
+            if (!strNumber.All(char.IsDigit))
             {
                 throw new FormatException("Input must contain only numeric digits.");
             }
@@ -100,6 +91,19 @@ namespace Garage {
         public static T EnumMenuToEnumChoice<T>(string i_Message) where T : Enum {
             EnumToMenu<T>(i_Message);
             return (T)(object)GetSingleDigit();
+        }
+        
+        public static int EnumMenuToIntChoiceWithValidation<T>(string i_Message, int i_Min, int i_Max) where T : Enum {
+            EnumMenuToEnumChoice<T>(i_Message);
+            int choice = GetSingleDigit();
+            validateNumberInRange(choice, i_Min, i_Max);
+            return choice;
+        }
+    
+        private static void validateNumberInRange(int i_Number, int i_Min, int i_Max) {
+            if (i_Number < i_Min || i_Number > i_Max) {
+                throw new ValueOutOfRangeException(new Exception("Invalid input, please try again"), i_Min, i_Max);
+            }
         }
     }
 }   

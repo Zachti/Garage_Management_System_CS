@@ -79,7 +79,7 @@ namespace Garage {
 
         private void handleUpdateVechileState() {
                 getLicensePlate(out string licensePlate);
-                int choice = EnumMenuToIntChoiceWithValidation<eCarStatus>("Please enter the new vehicle status:", (int)eCarStatus.InRepair ,(int)eCarStatus.Paid);
+                int choice = Utilities.EnumMenuToIntChoiceWithValidation<eCarStatus>("Please enter the new vehicle status:", (int)eCarStatus.InRepair ,(int)eCarStatus.Paid);
                 Garage.ChangeCarStatus(licensePlate, (eCarStatus)choice);
         }
     
@@ -135,25 +135,12 @@ namespace Garage {
         }
     
         private VehicleFilter? getVehicleFilter() {
-            int choice = EnumMenuToIntChoiceWithValidation<eCarStatus>("Please enter the vehicle status you want to filter by or 0 if you don't want any filter:", (int)eCarStatus.InRepair - 1, (int)eCarStatus.Paid);
+            int choice = Utilities.EnumMenuToIntChoiceWithValidation<eCarStatus>("Please enter the vehicle status you want to filter by or 0 if you don't want any filter:", (int)eCarStatus.InRepair - 1, (int)eCarStatus.Paid);
             return choice == 0 ? null : new VehicleFilter((eCarStatus)choice);
         }
 
-        private void validateNumberInRange(int i_Number, int i_Min, int i_Max) {
-            if (i_Number < i_Min || i_Number > i_Max) {
-                throw new ValueOutOfRangeException(new Exception("Invalid input, please try again"), i_Min, i_Max);
-            }
-        }
-        
-        private int EnumMenuToIntChoiceWithValidation<T>(string i_Message, int i_Min, int i_Max) where T : Enum {
-            Utilities.EnumMenuToEnumChoice<T>(i_Message);
-            int choice = Utilities.GetSingleDigit();
-            validateNumberInRange(choice, i_Min, i_Max);
-            return choice;
-        }
-    
         private eFuelType getFuelType() =>
-            (eFuelType)EnumMenuToIntChoiceWithValidation<eFuelType>("Please enter the fuel type you want to add:", (int)eFuelType.Octan95, (int)eFuelType.Solar);
+            (eFuelType)Utilities.EnumMenuToIntChoiceWithValidation<eFuelType>("Please enter the fuel type you want to add:", (int)eFuelType.Octan95, (int)eFuelType.Solar);
     
         private static void getAmountToAdd(out float o_AmountToAdd) {
             Console.WriteLine("Please enter the amount of fuel you want to add:");
