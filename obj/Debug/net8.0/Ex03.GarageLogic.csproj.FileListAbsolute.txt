@@ -1,0 +1,14 @@
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.AssemblyInfoInputs.cache
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.AssemblyInfo.cs
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.csproj.CoreCompileInputs.cache
+/Users/zachti/Ex03.GarageLogic/bin/Debug/net8.0/Ex03.GarageLogic
+/Users/zachti/Ex03.GarageLogic/bin/Debug/net8.0/Ex03.GarageLogic.deps.json
+/Users/zachti/Ex03.GarageLogic/bin/Debug/net8.0/Ex03.GarageLogic.runtimeconfig.json
+/Users/zachti/Ex03.GarageLogic/bin/Debug/net8.0/Ex03.GarageLogic.dll
+/Users/zachti/Ex03.GarageLogic/bin/Debug/net8.0/Ex03.GarageLogic.pdb
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.dll
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/refint/Ex03.GarageLogic.dll
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.pdb
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/Ex03.GarageLogic.genruntimeconfig.cache
+/Users/zachti/Ex03.GarageLogic/obj/Debug/net8.0/ref/Ex03.GarageLogic.dll
