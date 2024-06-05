@@ -1,10 +1,10 @@
 namespace Garage
 {
-    internal class Wheel
+    internal class Wheel(i_Manufacturer, i_Pressure, i_MaxPressure)
     {
-        private string Manufacturer { get; set; } = string.Empty;
-        private float  Pressure { get; set; } = 0;
-        private float MaxPressure { get; set; } = 0;
+        private string Manufacturer { get; set; } = i_Manufacturer;
+        private float  Pressure { get; set; } = i_Pressure;
+        private float MaxPressure { get; set; } = i_MaxPressure;
 
         public void TireInflation(float i_PressureToAdd)
         {
