@@ -17,5 +17,7 @@ namespace Garage
         }
     
         private bool isInflateImpossible(float i_PressureToAdd) => Pressure + i_PressureToAdd > MaxPressure;
+
+        public void InflateToMax() => Pressure = MaxPressure;
     }
 }

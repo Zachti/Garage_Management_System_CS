@@ -6,15 +6,15 @@ namespace Garage {
             FuelType = i_FuelType;
         }
 
-        public void Refuel(float i_Amount, eFuelType i_FuelType) {
-            if (IsRefuelImpossible(i_Amount)) {
+        public override void SupplyMaxEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
+            if (IsRefuelImpossible(i_AmountToAdd)) {
                 Exception ex = new Exception("Cannot fuel more than the maximum possible capacity!");
                 throw new OutOfRangeException(ex, 0, getMaxCapacityPossible());
             }
-            if (isFuelTypeMismatch(i_FuelType)) {
+            if (isFuelTypeMismatch((eFuelType)i_FuelType)) {
                 throw new ArgumentException("Fuel type mismatch");
             }
-            CurrentCapacity += i_Amount;
+            CurrentCapacity += i_AmountToAdd;
         }
 
         private bool IsRefuelImpossible(float i_Amount) => i_Amount + GetCurrentCapacity() > GetMaxCapacity();

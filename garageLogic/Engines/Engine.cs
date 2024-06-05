@@ -8,5 +8,7 @@ namespace Garage {
         public float GetCurrentCapacity() => CurrentCapacity;
 
         protected float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;
+
+        public abstract void SupplyMaxEnergy(float i_AmountToAdd, eFuelType? i_FuelType);
     }
 }

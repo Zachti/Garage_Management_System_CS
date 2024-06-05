@@ -35,5 +35,13 @@ namespace Garage {
                 .Select(entry => entry.Key)
                 .ToList();
         }
+    
+        public void ChangeCarStatus(string i_LicensePlate, eCarStatus i_NewStatus) => GarageEntries[i_LicensePlate].Status = i_NewStatus;
+
+        public void InflateWheelsToMax(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle.InflateWheelsToMax();
+
+        public void SupplyMaxEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyMaxEnergy(i_FuelType, i_AmountToAdd);
+   
+        public Vehicle GetVehicleByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle;
     }
 }

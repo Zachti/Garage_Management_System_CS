@@ -9,6 +9,15 @@ namespace Garage
         private float i_LeftEnergyPercentage { get; set; }
         private List<Wheel> Wheels { get; set; } =  i_Dto.i_Wheels;
         private Engine Engine { get;} = i_Dto.i_Engine;
-    }
+
+        public void InflateWheelsToMax()
+        {
+            foreach (Wheel wheel in Wheels)
+            {
+                wheel.InflateToMax();
+            }
+        }
     
+        public void SupplyMaxEnergy(eFuelType? i_FuelType, float i_AmountToAdd) => Engine.SupplyMaxEnergy(i_AmountToAdd, i_FuelType);
+    }
 }
