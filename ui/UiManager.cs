@@ -10,7 +10,12 @@ namespace Garage {
             while (!IsUserWantToExit) {
                 printMainMenu();
                 eMainMenuOptions userChoice = (eMainMenuOptions)Utilities.GetSingleDigit();
-                executeChoice(userChoice);
+                try {
+                    executeChoice(userChoice);
+                }
+                catch (Exception ex) {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -54,24 +59,13 @@ namespace Garage {
         }
     
         private void handleAddVehicle() {
-            try {
-                getLicensePlate(out string licensePlate);
                 Utilities.EnumToMenu<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
                 VehicleInputTransformer inputTransformer = getVehicleInputTransformer(out eSupportVehicles vehicleType);
                 AddVehicleInput addVehicleInput = getAddVehicleInput(inputTransformer, vehicleType);
                 Garage.AddVehicle(addVehicleInput);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
     
         private void handlePrintLicensePlatesOrderByFilter() {
-            try {
-
                 VehicleFilter? filter = getVehicleFilter();
                 List<string> vehicles = Garage.GetAllLicensePlatesRegistered(filter);
                 StringBuilder output = new StringBuilder();
@@ -81,82 +75,35 @@ namespace Garage {
                 }
 
                  Console.WriteLine(output.ToString());
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
 
         private void handleUpdateVechileState() {
-            try {
                 getLicensePlate(out string licensePlate);
                 int choice = EnumMenuToIntChoiceWithValidation<eCarStatus>("Please enter the new vehicle status:", (int)eCarStatus.InRepair ,(int)eCarStatus.Paid);
                 Garage.ChangeCarStatus(licensePlate, (eCarStatus)choice);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
     
         private void handleInflateAllWheelsToMax() {
-            try {
                 getLicensePlate(out string licensePlate);
                 Garage.InflateWheelsToMax(licensePlate);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
     
         private void handleRefuelVehicle() {
-            try {
                 getLicensePlate(out string licensePlate);
                 getAmountToAdd(out float amountToAdd);
                 eFuelType fuelType = getFuelType();
                 Garage.SupplyEnergy(licensePlate, amountToAdd, fuelType);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
 
         private void handleChargeVehicle() {
-            try {
                 getLicensePlate(out string licensePlate);
                 getAmountToAdd(out float amountToAdd);
                 Garage.SupplyEnergy(licensePlate, amountToAdd, null);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
     
         private void handleDisplayFullVehicleDetails() {
-            try {
                 getLicensePlate(out string licensePlate);
                 Console.WriteLine(Garage.GetVehicleInfoByLicensePlate(licensePlate));
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            finally {
-                Start();
-            }
         }
     
         private void handleGarageExit() {
