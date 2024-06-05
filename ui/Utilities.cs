@@ -32,9 +32,7 @@ namespace Garage {
         {
             string strNumber = Console.ReadLine() ?? string.Empty;
 
-            int strLength = strNumber.Length;
-
-            validateNumberInRange(strLength, i_MinNumOfDigits, i_MaxNumOfDigits);
+            validateNumberInRange(strNumber.Length, i_MinNumOfDigits, i_MaxNumOfDigits);
 
             if (!strNumber.All(char.IsDigit))
             {
