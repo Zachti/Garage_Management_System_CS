@@ -1,11 +1,6 @@
 namespace Garage {
-
-    internal interface IVehicleFactory {
-        Vehicle CreateVehicle(eSupportVehicles i_VehicleType, string i_LicensePlate, string i_Model, List<Wheel> i_Wheels, eMotorLicenseType? i_LicenseType, int? i_EngineVolume, eCarColors? i_Color, int? i_NumberOfDoors, bool? i_IsCarryingDangerousMaterials, float? i_CargoVolume);
-    }
-
-    internal class VehicleFactory: IVehicleFactory {
-        public Vehicle CreateVehicle(eSupportVehicles i_VehicleType ,string i_LicensePlate, string i_Model, List<Wheel> i_Wheels, eMotorLicenseType? i_LicenseType, int? i_EngineVolume, eCarColors? i_Color, int? i_NumberOfDoors, bool? i_IsCarryingDangerousMaterials, float? i_CargoVolume) {
+    internal class VehicleFactory {
+        public static Vehicle CreateVehicle(eSupportVehicles i_VehicleType ,string i_LicensePlate, string i_Model, List<Wheel> i_Wheels, eMotorLicenseType? i_LicenseType, int? i_EngineVolume, eCarColors? i_Color, int? i_NumberOfDoors, bool? i_IsCarryingDangerousMaterials, float? i_CargoVolume) {
             return i_VehicleType switch 
             {
                 eSupportVehicles.Motorcycle => new MotorCycle(new CreateMotorCycleInput(new CreateVehicleInput(i_Model, i_LicensePlate, i_Wheels, new FuelEngine(5.5f, eFuelType.Octan98)), (eMotorLicenseType)i_LicenseType, (int)i_EngineVolume)),
