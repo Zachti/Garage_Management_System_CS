@@ -5,7 +5,7 @@ namespace Garage {
     internal record AddVehicleInput(Owner i_Owner, eSupportVehicles i_SelectedVehicleType, string i_LicensePlate, string i_Model, List<Wheel> i_Wheels, eMotorLicenseType? i_LicenseType, int? i_EngineVolume, eCarColors? i_Color, int? i_NumberOfDoors, bool? i_IsCarryingDangerousMaterials, float? i_CargoVolume);
     
     internal class Garage {
-        private Dictionary<string, GarageEntry> GarageEntries {get; set; } = new Dictionary<string, GarageEntry>();
+        private Dictionary<string, GarageEntry> GarageEntries {get; set; } = [];
 
         public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
             if ( isVehicleExists(i_AddVehicleInput.i_LicensePlate) ) 
