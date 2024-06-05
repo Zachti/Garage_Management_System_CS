@@ -1,6 +1,6 @@
 namespace Garage {
     internal enum eCarColors {
-        Red,
+        Red = 1,
         Yellow,
         Black,
         White

@@ -1,6 +1,6 @@
 namespace Garage {
     internal enum eEngineType {
-        Fuel,
+        Fuel = 1,
         Electric
     }
 }
