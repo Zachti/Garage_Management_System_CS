@@ -21,7 +21,7 @@ namespace Garage
 
         public override VehicleData Transform(eSupportVehicles i_VehicleType) 
         {
-
+            
             BasicVehicleData basicVehicleData = getBasicVehicleData(i_VehicleType);
             eCarColors carColor = getCarColor();
             eCarNumberOfDoors numberOfDoors = getNumberOfDoors();
@@ -30,9 +30,9 @@ namespace Garage
 
         }
 
-        protected eCarColors getCarColor() => Utilities.EnumMenuToEnumChoice<eCarColors>("Please enter the car color from the options below:");
+        private eCarColors getCarColor() => Utilities.EnumMenuToEnumChoice<eCarColors>("Please enter the car color from the options below:");
     
-        protected eCarNumberOfDoors getNumberOfDoors() =>
+        private eCarNumberOfDoors getNumberOfDoors() =>
             Utilities.EnumMenuToEnumChoice<eCarNumberOfDoors>("Please enter the number of doors from the options below:");
 
     }

@@ -3,28 +3,24 @@ namespace Garage {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
         private const float k_MaxFuelAmount = 120f;
 
-
-        protected override Engine getEngineData(eEngineType i_EngineType) =>
+        protected override sealed Engine getEngineData(eEngineType i_EngineType) =>
             i_EngineType switch {
                 eEngineType.Fuel => new FuelEngine(k_MaxFuelAmount, eFuelType.Solar),
                 _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
             };
 
-        protected override List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
+        protected override sealed List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
             i_Wheels.Select(wheelPressure =>
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Truck))
             ).ToList();
     
-        public override VehicleData Transform(eSupportVehicles i_VehicleType) 
+        public override sealed VehicleData Transform(eSupportVehicles i_VehicleType) 
         {
-
-            BasicVehicleData basicVehicleData = getBasicVehicleData(i_VehicleType);
-            eCarColors carColor = getCarColor();
-            eCarNumberOfDoors numberOfDoors = getNumberOfDoors();
+            VehicleData vehicleData = base.Transform(i_VehicleType);
             bool isCarryingDangerousMaterials = IsTruckCarryingDangerousMaterials();
             float cargoVolume = getCargoVolume();
-            return new VehicleData(basicVehicleData, carColor, numberOfDoors, null, null, isCarryingDangerousMaterials, cargoVolume);
 
+            return vehicleData with { i_IsCarryingDangerousMaterials = isCarryingDangerousMaterials, i_CargoVolume = cargoVolume };
         }
 
         private bool IsTruckCarryingDangerousMaterials()

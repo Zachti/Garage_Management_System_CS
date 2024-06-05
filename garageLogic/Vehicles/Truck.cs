@@ -6,7 +6,7 @@ namespace Garage {
         private bool IsCarryingDangerousMaterials { get; } = i_Dto.i_IsCarryingDangerousMaterials;
         private float CargoVolume { get; } = i_Dto.i_CargoVolume;
 
-        public override string ToString() {
+        public override sealed string ToString() {
             return string.Format(
                 @"{0}
                 Truck's Color: {1}

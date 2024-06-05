@@ -6,7 +6,10 @@ namespace Garage {
 
         protected float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;
 
-        public abstract void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType);
+        public virtual void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
+            EnsureEnergySupplyIsValid(i_AmountToAdd);
+            CurrentCapacity += i_AmountToAdd;
+        }
 
         public float getLeftEnergyPercentage() => CurrentCapacity / MaxCapacity * 100f;
 

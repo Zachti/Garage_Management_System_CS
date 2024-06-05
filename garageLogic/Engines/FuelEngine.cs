@@ -3,12 +3,11 @@ namespace Garage {
     internal class FuelEngine(float i_MaxCapacity, eFuelType i_FuelType) : Engine(i_MaxCapacity) {
         public eFuelType FuelType { get; } = i_FuelType;
 
-        public override void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
-            EnsureEnergySupplyIsValid(i_AmountToAdd);
+        public override sealed void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
             if (isFuelTypeMismatch((eFuelType)i_FuelType!)) {
                 throw new ArgumentException("Fuel type mismatch");
             }
-            CurrentCapacity += i_AmountToAdd;
+            base.SupplyEnergy(i_AmountToAdd, i_FuelType);
         }
 
         private bool isFuelTypeMismatch(eFuelType i_FuelType) {
@@ -18,12 +17,14 @@ namespace Garage {
 
         private bool IsOctaneFuel(eFuelType i_FuelType)
         {
-            return i_FuelType == eFuelType.Octan95 ||
-                i_FuelType == eFuelType.Octan96 ||
-                i_FuelType == eFuelType.Octan98;
+        List<eFuelType> fuelTypes = Enum.GetValues(typeof(eFuelType))
+                                         .Cast<eFuelType>()
+                                         .Where(ft => ft != eFuelType.Solar)
+                                         .ToList();
+            return fuelTypes.Contains(i_FuelType);
         }
     
-        public override string ToString() {
+        public override sealed string ToString() {
             return string.Format(
                 @"Current amount of fuel : {0} 
                 Max amount of fuel : {1} 

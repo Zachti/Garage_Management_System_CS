@@ -22,7 +22,7 @@ namespace Garage {
 
         public void InflateToMax() => Pressure = MaxPressure;
 
-        public override string ToString()
+        public override sealed string ToString()
         {
             return string.Format(
                 @"Wheel manufacturer: {0}

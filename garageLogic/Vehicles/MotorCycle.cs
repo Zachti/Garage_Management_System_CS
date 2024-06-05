@@ -6,7 +6,7 @@ namespace Garage {
         private eMotorLicenseType LicenseType { get; } = i_Dto.i_LicenseType;
         private int EngineVolume { get; } = i_Dto.i_EngineVolume;
 
-        public override string ToString() {
+        public override sealed string ToString() {
                string result;
 
             result = string.Format(
