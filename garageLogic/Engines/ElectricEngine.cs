@@ -7,7 +7,7 @@ namespace Garage {
         public override void SupplyMaxEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
             if (isRechargeImpossible(i_AmountToAdd)) {
                 Exception ex = new Exception("Cannot recharge more than the maximum possible capacity");
-                throw new OutOfRangeException(ex, 0, getMaxCapacityPossible());
+                throw new ValueOutOfRangeException(ex, 0, getMaxCapacityPossible());
             }
 
             CurrentCapacity += i_AmountToAdd;

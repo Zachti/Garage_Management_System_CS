@@ -9,7 +9,7 @@ namespace Garage {
         public override void SupplyMaxEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
             if (IsRefuelImpossible(i_AmountToAdd)) {
                 Exception ex = new Exception("Cannot fuel more than the maximum possible capacity!");
-                throw new OutOfRangeException(ex, 0, getMaxCapacityPossible());
+                throw new ValueOutOfRangeException(ex, 0, getMaxCapacityPossible());
             }
             if (isFuelTypeMismatch((eFuelType)i_FuelType)) {
                 throw new ArgumentException("Fuel type mismatch");
