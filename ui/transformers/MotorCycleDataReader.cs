@@ -2,10 +2,12 @@ namespace Garage {
     
     internal class MotorcycleInputTransformer: VehicleInputTransformer {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Motorcycle;
+        private const float k_MaxFuelAmount = 5.5f;
+        private const float k_MaxBatteryTime = 2.5f;
         protected override Engine getEngineData(eEngineType i_EngineType) =>
             i_EngineType switch {
-                eEngineType.Fuel =>  new FuelEngine(5.5f, eFuelType.Octan98),
-                eEngineType.Electric => new ElectricEngine(2.5f),
+                eEngineType.Fuel =>  new FuelEngine(k_MaxFuelAmount, eFuelType.Octan98),
+                eEngineType.Electric => new ElectricEngine(k_MaxBatteryTime),
                 _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
             };
 
