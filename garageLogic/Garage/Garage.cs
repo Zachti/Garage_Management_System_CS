@@ -30,7 +30,7 @@ namespace Garage {
         public List<string> GetAllLicensePlatesRegistered(VehicleFilter? i_Filter) 
         {
             return GarageEntries
-                .Where(entry => entry.Value.Status == i_Filter?.i_CarStatus)
+                .Where(entry => i_Filter == null || entry.Value.Status == i_Filter.i_CarStatus)
                 .Select(entry => entry.Key)
                 .ToList();
         }
@@ -39,8 +39,12 @@ namespace Garage {
 
         public void InflateWheelsToMax(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle.InflateWheelsToMax();
 
-        public void SupplyMaxEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
+        public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
    
-        public Vehicle GetVehicleByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].Vehicle;
+        public string GetVehicleInfoByLicensePlate(string i_LicensePlate)
+        {
+            GarageEntry entry = GarageEntries[i_LicensePlate];
+            return string.Format("{0}\nVehicle repairing state: {1}\n{2}", entry.Owner.ToString(), entry.Status, entry.Vehicle.ToString());
+        } 
     }
 }

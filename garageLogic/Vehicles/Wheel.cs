@@ -1,10 +1,12 @@
-namespace Garage
-{
-    internal class Wheel(string i_Manufacturer, float i_Pressure, float i_MaxPressure)
+namespace Garage {
+
+    internal record CreateWheelInput(string i_Manufacturer, float i_Pressure, float i_MaxPressure);
+    
+    internal class Wheel(CreateWheelInput i_Dto)
     {
-        private string Manufacturer { get; set; } = i_Manufacturer;
-        private float  Pressure { get; set; } = i_Pressure;
-        private float MaxPressure { get; set; } = i_MaxPressure;
+        private string Manufacturer { get; set; } = i_Dto.i_Manufacturer;
+        private float  Pressure { get; set; } = i_Dto.i_Pressure;
+        private float MaxPressure { get; set; } = i_Dto.i_MaxPressure;
 
         public void TireInflation(float i_PressureToAdd)
         {
