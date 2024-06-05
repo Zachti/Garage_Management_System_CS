@@ -26,7 +26,7 @@ namespace Garage {
         private bool IsTruckCarryingDangerousMaterials()
         {
             Console.WriteLine("Is the truck carrying dangerous materials? (Y/N)");
-            string input = Console.ReadLine()?.Trim().ToLower() ?? string.Empty;
+            string input = Utilities.GetInputOrEmpty().Trim().ToLower();
             if (input != "y" && input != "n")
             {
                 throw new ArgumentException("Invalid input, please enter Y or N");

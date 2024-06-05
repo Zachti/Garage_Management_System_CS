@@ -4,7 +4,7 @@ namespace Garage {
     internal class Utilities {
         
         public static float[] GetFloatArray(int i_WheelsNumber) {
-            string input = Console.ReadLine() ?? string.Empty;
+            string input = GetInputOrEmpty();
             string[] splitInput = input.Split(',');
 
             if (splitInput.Length != i_WheelsNumber)
@@ -22,7 +22,7 @@ namespace Garage {
         
         public static T GetNumber<T>() where T : IConvertible
         {
-            string strFloatNum = Console.ReadLine() ?? string.Empty;
+            string strFloatNum = GetInputOrEmpty();
 
             return (T)Convert.ChangeType(strFloatNum, typeof(T));
 
@@ -30,7 +30,7 @@ namespace Garage {
         
         public static string GetNumberAsString(int i_MinNumOfDigits, int i_MaxNumOfDigits) 
         {
-            string strNumber = Console.ReadLine() ?? string.Empty;
+            string strNumber = GetInputOrEmpty();
 
             validateNumberInRange(strNumber.Length, i_MinNumOfDigits, i_MaxNumOfDigits);
 
@@ -43,7 +43,7 @@ namespace Garage {
         }
     
         public static string GetAlphabeticString() {
-            string input = Console.ReadLine() ?? string.Empty;
+            string input = GetInputOrEmpty();
 
             if (string.IsNullOrWhiteSpace(input) || !input.All(ch => char.IsLetter(ch) || ch == ' ')) {
                 throw new FormatException("Input must contain only alphabetic characters and spaces.");
@@ -59,7 +59,7 @@ namespace Garage {
         public static int GetSingleDigit() 
         {
 
-            string input = Console.ReadLine() ?? string.Empty;
+            string input = GetInputOrEmpty();
 
             if (input?.Length != 1)
             {
@@ -102,6 +102,10 @@ namespace Garage {
             if (i_Number < i_Min || i_Number > i_Max) {
                 throw new ValueOutOfRangeException(new Exception("Invalid input, please try again"), i_Min, i_Max);
             }
+        }
+    
+        public static string GetInputOrEmpty() {
+            return Console.ReadLine() ?? string.Empty;
         }
     }
 }   
