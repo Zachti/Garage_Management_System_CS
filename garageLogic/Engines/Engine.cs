@@ -1,12 +1,8 @@
 namespace Garage {
     
     internal abstract class Engine(float i_MaxCapacity) {
-        protected float MaxCapacity { get; } = i_MaxCapacity;
-        protected float CurrentCapacity { get; set; }
-
-        public float GetMaxCapacity() => MaxCapacity;
-
-        public float GetCurrentCapacity() => CurrentCapacity;
+        private float MaxCapacity { get; } = i_MaxCapacity;
+        private float CurrentCapacity { get; set; }
 
         protected float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;
 
@@ -21,7 +17,7 @@ namespace Garage {
             }
         }
 
-        private bool isSupplyEnergyImpossible(float i_AmountToAdd) => i_AmountToAdd + GetCurrentCapacity() > GetMaxCapacity();
+        private bool isSupplyEnergyImpossible(float i_AmountToAdd) => i_AmountToAdd + CurrentCapacity > MaxCapacity;
 
         public abstract override string ToString();
     }

@@ -14,9 +14,9 @@ namespace Garage {
             string customerName, customerPhoneNumber;
 
             Console.WriteLine("Please enter your name");
-            customerName = UIManager.GetAlphabeticString();
+            customerName = Utilities.GetAlphabeticString();
             Console.WriteLine("Please enter your phone number, note that a valid phone number is 9 or 10 digits long");
-            customerPhoneNumber = UIManager.GetNumberAsString(9, 10);
+            customerPhoneNumber = Utilities.GetNumberAsString(9, 10);
             return new Owner(customerName, customerPhoneNumber);
         }
     
@@ -40,17 +40,17 @@ namespace Garage {
 
         private float[] getWheelsPressure(eWheelsNumber i_WheelsNumber) {
             Console.WriteLine("Please enter the wheels pressure, separated by a comma");
-            return UIManager.GetFloatArray((int)i_WheelsNumber);
+            return Utilities.GetFloatArray((int)i_WheelsNumber);
         }
     
         private string getManufacturer() {
             Console.WriteLine("Please enter the wheels manufacturer");
-            return UIManager.GetAlphabeticString();
+            return Utilities.GetAlphabeticString();
         }
     
         private string getModel() {
             Console.WriteLine("Please enter the vehicle model");
-            return UIManager.GetAlphabeticString();
+            return Utilities.GetAlphabeticString();
         }
     }
-}
+}   

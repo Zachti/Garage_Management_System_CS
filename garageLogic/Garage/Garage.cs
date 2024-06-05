@@ -1,13 +1,5 @@
 namespace Garage {
     
-    internal record VehicleFilter(eCarStatus i_CarStatus);
-
-    internal record AddVehicleInput(VehicleData VehicleData, eSupportVehicles i_SelectedVehicleType, string i_LicensePlate);
-    
-    internal record BasicVehicleData(Engine Engine, List<Wheel> Wheels, Owner Owner, string Model);
-
-    internal record VehicleData(BasicVehicleData BasicVehicleData, eCarColors? CarColor, eCarNumberOfDoors? numberOfDoors, eMotorLicenseType? MotorLicenseType,int? i_EngineVolume, bool? IsCarryingDangerousMaterials, float? CargoVolume);
-
     internal class Garage {
         private Dictionary<string, GarageEntry> GarageEntries {get; set; } = [];
 
@@ -27,8 +19,10 @@ namespace Garage {
         private void changeCarStatusToInRepair(string i_LicensePlate) => GarageEntries[i_LicensePlate].Status = eCarStatus.InRepair;
 
         private void addNewVehicle(AddVehicleInput i_AddVehicleInput) {
-            Vehicle vehicle = VehicleFactory.CreateVehicle(i_AddVehicleInput.i_SelectedVehicleType, i_AddVehicleInput.i_Model, i_AddVehicleInput.i_LicensePlate, i_AddVehicleInput.i_Wheels, i_AddVehicleInput.i_LicenseType, i_AddVehicleInput.i_EngineVolume, i_AddVehicleInput.i_Color, i_AddVehicleInput.i_NumberOfDoors, i_AddVehicleInput.i_IsCarryingDangerousMaterials, i_AddVehicleInput.i_CargoVolume);
-            GarageEntries.Add(i_AddVehicleInput.i_LicensePlate, new GarageEntry(new CreateGarageEntryInput(vehicle, i_AddVehicleInput.i_Owner)));
+            BasicVehicleData basicVehicleData = i_AddVehicleInput.i_VehicleData.i_BasicVehicleData;
+            VehicleData extendedVehicleData = i_AddVehicleInput.i_VehicleData;
+            Vehicle vehicle = VehicleFactory.CreateVehicle(i_AddVehicleInput.i_SelectedVehicleType, basicVehicleData.i_Model, i_AddVehicleInput.i_LicensePlate, basicVehicleData.i_Wheels, extendedVehicleData.i_MotorLicenseType, extendedVehicleData.i_EngineVolume, extendedVehicleData.i_CarColor, extendedVehicleData.i_NumberOfDoors, extendedVehicleData.i_IsCarryingDangerousMaterials, extendedVehicleData.i_CargoVolume);
+            GarageEntries.Add(i_AddVehicleInput.i_LicensePlate, new GarageEntry(new CreateGarageEntryInput(vehicle, basicVehicleData.i_Owner)));
         }
     
         public List<string> GetAllLicensePlatesRegistered(VehicleFilter? i_Filter) 

@@ -39,7 +39,7 @@ namespace Garage {
         private float getCargoVolume()
         {
             Console.WriteLine("Please enter the truck's cargo volume:");
-            return UIManager.GetNumber<float>();
+            return Utilities.GetNumber<float>();
     }
     }
 }

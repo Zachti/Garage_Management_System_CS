@@ -28,18 +28,10 @@ namespace Garage
 
         }
 
-        protected eCarColors getCarColor()
-        {
-            Console.WriteLine();
-            UIManager.EnumToMenu<eCarColors>("Please enter the car color from the options below:");
-            return (eCarColors)UIManager.GetSingleDigit();
-        }
+        protected eCarColors getCarColor() => Utilities.EnumMenuToEnumChoice<eCarColors>("Please enter the car color from the options below:");
     
-        protected eCarNumberOfDoors getNumberOfDoors()
-        {
-            UIManager.EnumToMenu<eCarNumberOfDoors>("Please enter the number of doors from the options below:");
-            return (eCarNumberOfDoors)UIManager.GetSingleDigit();
-        }
+        protected eCarNumberOfDoors getNumberOfDoors() =>
+            Utilities.EnumMenuToEnumChoice<eCarNumberOfDoors>("Please enter the number of doors from the options below:");
 
     }
 }

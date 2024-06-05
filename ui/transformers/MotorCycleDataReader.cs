@@ -22,14 +22,13 @@ namespace Garage {
             return new VehicleData(basicVehicleData, null, null, motorLicenseType, engineVolume, null, null);
         }
 
-        private eMotorLicenseType getMotorLicenseType() {
-            UIManager.EnumToMenu<eMotorLicenseType>("Please enter the motorcycle's license type:");
-            return (eMotorLicenseType)UIManager.GetSingleDigit();
-        }
+        private eMotorLicenseType getMotorLicenseType() =>
+            Utilities.EnumMenuToEnumChoice<eMotorLicenseType>("Please enter the motorcycle's license type:");
+
 
         private int getEngineVolume() {
             Console.WriteLine("Please enter the motorcycle's engine volume:");
-            return UIManager.GetNumber<int>();
+            return Utilities.GetNumber<int>();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Garage {
     internal class Wheel(CreateWheelInput i_Dto)
     {
         private string Manufacturer { get; set; } = i_Dto.i_Manufacturer;
-        private float  Pressure { get; set; } = i_Dto.i_Pressure;
+        private float Pressure { get; set; } = i_Dto.i_Pressure;
         private float MaxPressure { get; set; } = i_Dto.i_MaxPressure;
 
         public void TireInflation(float i_PressureToAdd)
@@ -13,7 +13,7 @@ namespace Garage {
             if (isInflateImpossible(i_PressureToAdd))
             {    
                 Exception ex = new Exception("Cannot inflate tire, pressure will exceed maximum pressure");
-                throw new ValueOutOfRangeException(ex, 0, MaxPressure);
+                throw new ValueOutOfRangeException(ex, 0, MaxPressure - Pressure);
             }
             Pressure += i_PressureToAdd;
         }

@@ -1,6 +1,6 @@
 namespace Garage {
     internal enum eCarStatus {
-        InRepair,
+        InRepair = 1,
         Repaired,
         Paid
     }
