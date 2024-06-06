@@ -50,7 +50,9 @@ namespace Garage {
             {
                 throwNotExistException(i_LicensePlate);
             }
-            GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
+            Vehicle vehicle = GarageEntries[i_LicensePlate].Vehicle;
+            validateEngineTypeAndOperationMatch(vehicle, i_FuelType);
+            vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
         }   
         
         public string GetVehicleInfoByLicensePlate(string i_LicensePlate) {
@@ -64,5 +66,17 @@ namespace Garage {
         private bool isVehicleExist(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
 
         private void throwNotExistException(string i_LicensePlate) => throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
+    
+        private void validateEngineTypeAndOperationMatch(Vehicle i_Vehicle, eFuelType? i_FuelType) {
+            if (!i_Vehicle.IsElectricVehicle() && i_FuelType == null) 
+            {
+                throw new ArgumentException("You can't recharge fuel engine!");
+            }
+            if (i_Vehicle.IsElectricVehicle() && i_FuelType != null) 
+            {
+                throw new ArgumentException("You can't fuel battery!");
+            }
+
+        }
     }
 }

@@ -40,5 +40,7 @@ namespace Garage
                 wheelsInfo.ToString().TrimStart(),
                 Engine.ToString().TrimStart());
         }
+    
+        public bool IsElectricVehicle() => Engine is ElectricEngine;
     }
 }
