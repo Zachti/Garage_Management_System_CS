@@ -7,7 +7,6 @@ namespace Garage {
         RefuelVehicle,
         ChargeVehicle,
         DisplayFullVehicleDetails,
-        ReturnToMainMenu,
         Exit
     }
 }
