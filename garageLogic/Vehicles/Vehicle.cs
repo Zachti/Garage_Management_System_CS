@@ -27,9 +27,9 @@ namespace Garage
 
         public override string ToString() {
             StringBuilder wheelsInfo = new StringBuilder();
-            foreach (Wheel wheel in Wheels)
+            foreach (int index in Enumerable.Range(0, Wheels.Count))
             {
-                wheelsInfo.AppendLine(wheel.ToString());
+                wheelsInfo.AppendLine($"Wheel No. {index + 1}: {Wheels[index]}");
             }
            return string.Format(
                 @"Vehicel license plate: {0}
