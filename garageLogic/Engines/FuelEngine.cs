@@ -27,9 +27,9 @@ namespace Garage {
         public override sealed string ToString() {
             return string.Format(
                 @"Current amount of fuel : {0} 
-                Max amount of fuel : {1} 
-                Fuel type : {2}
-                Left energy percentage : {3} %",
+Max amount of fuel : {1} 
+Fuel type : {2}
+Left energy percentage : {3} %",
                 CurrentCapacity,
                 MaxCapacity,
                 FuelType,

@@ -6,7 +6,7 @@ namespace Garage {
 
         public override readonly string ToString() => string.Format(
         @"Owner name: {0}
-        Owner phone: {1}",
+Owner phone: {1}",
         Name,
         PhoneNumber);
     }

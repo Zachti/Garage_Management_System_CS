@@ -22,9 +22,8 @@ namespace Garage {
         {
             return string.Format(
             @"{0}
-            Vehicle status: {1}
-            {2}
-            ",
+Vehicle status: {1}
+{2}",
             Owner.ToString().TrimStart(),
             Status,
             Vehicle.ToString().TrimStart()

@@ -9,8 +9,8 @@ namespace Garage {
         public override sealed string ToString() {
             return string.Format(
             @"{0}
-            Motorcycle's license type: {1}
-            Motorcycle's engine cpacity: {2}",
+Motorcycle's license type: {1}
+Motorcycle's engine cpacity: {2}",
             base.ToString().TrimStart(),
             LicenseType.ToString().TrimStart(),
             EngineVolume );

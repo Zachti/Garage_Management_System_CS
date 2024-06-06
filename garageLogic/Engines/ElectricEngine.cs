@@ -6,8 +6,8 @@ namespace Garage {
             {
                 return string.Format(
                     @"Battery running time left : {0} 
-                    Max battery running time : {1}
-                    Left battery percentage : {2} %",
+Max battery running time : {1}
+Left battery percentage : {2} %",
                     CurrentCapacity,
                     MaxCapacity,
                     LeftEnergyPercentage);

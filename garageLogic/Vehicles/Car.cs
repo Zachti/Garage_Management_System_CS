@@ -9,9 +9,8 @@ namespace Garage {
         public override string ToString() {
             return string.Format(
                 @"{0}
-                Car's Color: {1}
-                Car's door quantity: {2}
-                ",
+Car's Color: {1}
+Car's door quantity: {2}",
                 base.ToString().TrimStart(),
                 Color,
                 NumberOfDoors);
