@@ -6,7 +6,7 @@ namespace Garage {
         public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
             if ( isVehicleExists(i_AddVehicleInput.i_LicensePlate) ) 
             {
-                changeCarStatusToInRepair(i_AddVehicleInput.i_LicensePlate);
+                ChangeCarStatus(i_AddVehicleInput.i_LicensePlate, eCarStatus.InRepair);
             }
             else 
             {
@@ -16,8 +16,6 @@ namespace Garage {
 
         private bool isVehicleExists(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     
-        private void changeCarStatusToInRepair(string i_LicensePlate) => ChangeCarStatus(i_LicensePlate, eCarStatus.InRepair);
-
         private void addNewVehicle(AddVehicleInput i_AddVehicleInput) {
             BasicVehicleData basicVehicleData = i_AddVehicleInput.i_VehicleData.i_BasicVehicleData;
             VehicleData extendedVehicleData = i_AddVehicleInput.i_VehicleData;
