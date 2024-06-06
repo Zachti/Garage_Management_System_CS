@@ -4,7 +4,7 @@ namespace Garage {
         protected float MaxCapacity { get; } = i_MaxCapacity;
         protected float CurrentCapacity { get; set; }
 
-        protected float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;
+        private float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;
 
         public virtual void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
             EnsureEnergySupplyIsValid(i_AmountToAdd);
@@ -20,7 +20,7 @@ namespace Garage {
             }
         }
 
-        private bool isSupplyEnergyImpossible(float i_AmountToAdd) => i_AmountToAdd + CurrentCapacity > MaxCapacity;
+        private bool isSupplyEnergyImpossible(float i_AmountToAdd) => i_AmountToAdd > getMaxCapacityPossible();
 
         public abstract override string ToString();
     }
