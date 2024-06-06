@@ -32,7 +32,7 @@ namespace Garage {
 
         private eEngineType getEngineType(eSupportVehicles i_VehicleType) {
             return i_VehicleType switch {
-                eSupportVehicles.ElectricCar or eSupportVehicles.ElectricMotorcycle => eEngineType.Fuel,
+                eSupportVehicles.ElectricCar or eSupportVehicles.ElectricMotorcycle => eEngineType.Electric,
                 eSupportVehicles.Car or eSupportVehicles.Motorcycle or eSupportVehicles.Truck => eEngineType.Fuel,
                 _ => throw new ArgumentException("Invalid vehicle type", nameof(i_VehicleType))
             };
