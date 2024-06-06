@@ -67,7 +67,7 @@ namespace Garage {
         }
     
         private void handlePrintLicensePlatesOrderByFilter() {
-                VehicleFilter? filter = getVehicleFilter();
+                VehicleFilter? filter = getVehicleFilterOrNull();
                 List<string> licensePlates = Garage.GetAllLicensePlatesRegistered(filter);
                 StringBuilder output = new StringBuilder();
                 if (licensePlates.Count > 0)
@@ -133,7 +133,7 @@ namespace Garage {
             return new AddVehicleInput(vehicleData, i_VehicleType, i_LicensePlate);
         }
     
-        private VehicleFilter? getVehicleFilter() {
+        private VehicleFilter? getVehicleFilterOrNull() {
             int choice = Utilities.EnumMenuToIntChoiceWithValidation<eCarStatus>("Please enter the vehicle status you want to filter by or 0 if you don't want any filter:", (int)eCarStatus.InRepair - 1, (int)eCarStatus.Paid);
             return choice == 0 ? null : new VehicleFilter((eCarStatus)choice);
         }
