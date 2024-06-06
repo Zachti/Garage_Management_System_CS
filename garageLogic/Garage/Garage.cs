@@ -13,8 +13,6 @@ namespace Garage {
                 addNewVehicle(i_AddVehicleInput);
             }
         }
-
-        private bool isVehicleExists(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     
         private void addNewVehicle(AddVehicleInput i_AddVehicleInput) {
             BasicVehicleData basicVehicleData = i_AddVehicleInput.i_VehicleData.i_BasicVehicleData;
@@ -42,5 +40,7 @@ namespace Garage {
         public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
    
         public string GetVehicleInfoByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].ToString();
+
+        private bool isVehicleExists(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     }
 }
