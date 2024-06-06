@@ -3,7 +3,7 @@ using System.Text;
 namespace Garage {
     internal class Utilities {
         
-        public static float[] WheelsDataToArray(int i_ArrayLength) {
+        public static float[] WheelsPressureToArray(int i_ArrayLength) {
             string input = GetInputOrEmpty();
             string[] splitInput = input.Split(',');
 
