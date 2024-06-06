@@ -27,9 +27,11 @@ namespace Garage {
             return string.Format(
                 @"Wheel manufacturer: {0}
                 Air pressure: {1}
+                Max air pressure: {2}
                 ",
                 Manufacturer,
-                Pressure);
+                Pressure,
+                MaxPressure);
         }
     }
 }
