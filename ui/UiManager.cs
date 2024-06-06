@@ -123,7 +123,7 @@ namespace Garage {
     
         private void getLicensePlate(out string o_LicensePlate) {
             Console.WriteLine("Please enter the vehicle's license plate number:");
-            o_LicensePlate = Utilities.GetNumberAsString(7, 8);
+            o_LicensePlate = Utilities.GetNumberAsString(7, 8, "license plate number must contain between 7 and 8 digits.");
         }
     
         private AddVehicleInput getAddVehicleInput(VehicleInputTransformer i_Transformer, eSupportVehicles i_VehicleType) {

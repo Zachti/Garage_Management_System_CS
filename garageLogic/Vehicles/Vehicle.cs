@@ -27,7 +27,7 @@ namespace Garage
             StringBuilder wheelsInfo = new StringBuilder();
             foreach (int index in Enumerable.Range(0, Wheels.Count))
             {
-                wheelsInfo.AppendLine($"Wheel No. {index + 1}: {Wheels[index]}");
+                wheelsInfo.AppendLine($"Wheel No. {index + 1}: {Wheels[index].ToString()}");
             }
            return string.Format(
                 @"Vehicel license plate: {0}

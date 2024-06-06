@@ -28,11 +28,11 @@ namespace Garage {
 
         }
         
-        public static string GetNumberAsString(int i_MinNumOfDigits, int i_MaxNumOfDigits) 
+        public static string GetNumberAsString(int i_MinNumOfDigits, int i_MaxNumOfDigits, string? i_Message = null) 
         {
             string strNumber = GetInputOrEmpty();
 
-            validateNumberInRange(strNumber.Length, i_MinNumOfDigits, i_MaxNumOfDigits);
+            validateNumberInRange(strNumber.Length, i_MinNumOfDigits, i_MaxNumOfDigits, i_Message);
 
             if (!strNumber.All(char.IsDigit))
             {
@@ -98,7 +98,7 @@ namespace Garage {
             return choice;
         }
     
-        private static void validateNumberInRange(int i_Number, int i_Min, int i_Max) {
+        private static void validateNumberInRange(int i_Number, int i_Min, int i_Max, string? i_Message = null) {
             if (i_Number < i_Min || i_Number > i_Max) {
                 throw new ValueOutOfRangeException(i_Number, i_Min, i_Max);
             }
