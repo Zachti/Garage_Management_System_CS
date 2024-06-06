@@ -1,7 +1,7 @@
 namespace Garage {
     
     internal class FuelEngine(float i_MaxCapacity, eFuelType i_FuelType) : Engine(i_MaxCapacity) {
-        public eFuelType FuelType { get; } = i_FuelType;
+        private eFuelType FuelType { get; } = i_FuelType;
 
         public override sealed void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
             if (isFuelTypeMismatch((eFuelType)i_FuelType!)) {
@@ -17,7 +17,7 @@ namespace Garage {
 
         private bool IsOctaneFuel(eFuelType i_FuelType)
         {
-        List<eFuelType> fuelTypes = Enum.GetValues(typeof(eFuelType))
+            List<eFuelType> fuelTypes = Enum.GetValues(typeof(eFuelType))
                                          .Cast<eFuelType>()
                                          .Where(ft => ft != eFuelType.Solar)
                                          .ToList();
