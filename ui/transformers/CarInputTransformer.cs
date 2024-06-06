@@ -7,7 +7,8 @@ namespace Garage
         private const float k_MaxBatteryTime = 3.5f;
 
         protected override Engine getEngineData(eEngineType i_EngineType) {
-            getCurrentEngineEnergy( out float currentEnergy);
+            float maxEnergy = getMaxEnergByType(k_MaxFuelAmount, k_MaxBatteryTime, i_EngineType);
+            getCurrentEngineEnergy( out float currentEnergy, maxEnergy);
             return i_EngineType switch
             {
                 eEngineType.Fuel => new FuelEngine(k_MaxFuelAmount, currentEnergy, eFuelType.Octan95),

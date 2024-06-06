@@ -4,7 +4,7 @@ namespace Garage {
         private const float k_MaxFuelAmount = 120f;
 
         protected override sealed Engine getEngineData(eEngineType i_EngineType) {
-            getCurrentEngineEnergy(out float currentFuel);
+            getCurrentEngineEnergy(out float currentFuel, k_MaxFuelAmount);
             return i_EngineType switch {
                 eEngineType.Fuel => new FuelEngine(k_MaxFuelAmount, currentFuel, eFuelType.Solar),
                 _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))

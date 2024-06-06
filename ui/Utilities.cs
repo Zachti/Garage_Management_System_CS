@@ -34,7 +34,7 @@ namespace Garage {
         {
             string strNumber = GetInputOrEmpty();
 
-            validateNumberInRange(strNumber.Length, i_MinNumOfDigits, i_MaxNumOfDigits, i_Message);
+            ValidateNumberInRange(strNumber.Length, i_MinNumOfDigits, i_MaxNumOfDigits, i_Message);
 
             if (!strNumber.All(char.IsDigit))
             {
@@ -96,13 +96,13 @@ namespace Garage {
         public static int EnumMenuToIntChoiceWithValidation<T>(string i_Message, int i_Min, int i_Max) where T : Enum {
             EnumMenuToEnumChoice<T>(i_Message);
             int choice = GetSingleDigit();
-            validateNumberInRange(choice, i_Min, i_Max);
+            ValidateNumberInRange(choice, i_Min, i_Max);
             return choice;
         }
     
-        private static void validateNumberInRange(int i_Number, int i_Min, int i_Max, string? i_Message = null) {
+        public static void ValidateNumberInRange(float i_Number, float i_Min, float i_Max, string? i_Message = null) {
             if (i_Number < i_Min || i_Number > i_Max) {
-                throw new ValueOutOfRangeException(i_Number, i_Min, i_Max);
+                throw new ValueOutOfRangeException(i_Number, i_Min, i_Max, i_Message);
             }
         }
     
