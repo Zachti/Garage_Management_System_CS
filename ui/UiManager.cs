@@ -109,16 +109,9 @@ namespace Garage {
             IsUserWantToExit = true;
         }
     
-        private VehicleInputTransformer getVehicleInputTransformer(out eSupportVehicles o_VehicleType) {
-             o_VehicleType = (eSupportVehicles)Utilities.GetSingleDigit();
-
-            return o_VehicleType switch
-            {
-                eSupportVehicles.Motorcycle or eSupportVehicles.ElectricMotorcycle => TransformerFactory.CreateTransformer(eVehicleTransformerTypes.Motorcycle),
-                eSupportVehicles.Car or eSupportVehicles.ElectricCar => TransformerFactory.CreateTransformer(eVehicleTransformerTypes.Car),
-                eSupportVehicles.Truck => TransformerFactory.CreateTransformer(eVehicleTransformerTypes.Truck),
-                _ => throw new ValueOutOfRangeException((float)o_VehicleType, (float)eSupportVehicles.Motorcycle, (float)eSupportVehicles.Truck)
-            };
+        private VehicleInputTransformer getVehicleInputTransformer(out eSupportVehicles io_VehicleType) {
+             io_VehicleType = (eSupportVehicles)Utilities.GetSingleDigit();
+             return TransformerFactory.CreateTransformer(io_VehicleType);
         }
     
         private void getLicensePlate(out string o_LicensePlate) {
@@ -207,7 +200,7 @@ namespace Garage {
     
         private void printExitMessage() {
             StringBuilder exitMessage = new StringBuilder(@"
-   ▄██████▄   ▄██████▄   ▄██████▄  ████████▄  ▀█████████▄  ▄██   ▄      ▄████████                             
+               ▄██████▄   ▄██████▄   ▄██████▄  ████████▄  ▀█████████▄  ▄██   ▄      ▄████████                             
   ███    ███ ███    ███ ███    ███ ███   ▀███   ███    ███ ███   ██▄   ███    ███                             
   ███    █▀  ███    ███ ███    ███ ███    ███   ███    ███ ███▄▄▄███   ███    █▀                              
  ▄███        ███    ███ ███    ███ ███    ███  ▄███▄▄▄██▀  ▀▀▀▀▀▀███  ▄███▄▄▄                                 
@@ -242,7 +235,7 @@ namespace Garage {
   ███    ███   ███    ███   ███    ███ ███  ███   ███               ███ ███    ███ ███    ███ ███   ███       
   ███    ███   ███    ███   ███    ███ ███  ███   ███         ▄█    ███ ███    ███ ███    ███ ███   ███       
   ███    █▀    ████████▀    ███    █▀  █▀    ▀█   █▀        ▄████████▀   ▀██████▀   ▀██████▀   ▀█   █▀        
-                                                                                                              
+   
    "); 
             Console.WriteLine(exitMessage.ToString());                                                                                                          
         }
