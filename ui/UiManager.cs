@@ -59,7 +59,7 @@ namespace Garage {
         private void handleAddVehicle() {
                 Utilities.EnumToMenu<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
                 VehicleInputTransformer inputTransformer = getTransformer(out eSupportVehicles vehicleType);
-                AddVehicleInput addVehicleInput = getAddVehicleInput(inputTransformer, vehicleType);
+                AddVehicleInput addVehicleInput = createAddVehicleInput(inputTransformer, vehicleType);
                 Garage.AddVehicle(addVehicleInput);
         }
     
@@ -119,7 +119,7 @@ namespace Garage {
             o_LicensePlate = Utilities.GetNumberAsString(7, 8, "license plate number must contain between 7 and 8 digits.");
         }
     
-        private AddVehicleInput getAddVehicleInput(VehicleInputTransformer i_Transformer, eSupportVehicles i_VehicleType) {
+        private AddVehicleInput createAddVehicleInput(VehicleInputTransformer i_Transformer, eSupportVehicles i_VehicleType) {
             VehicleData vehicleData = i_Transformer.Transform(i_VehicleType);
             getLicensePlate(out string licensePlate);
             return new AddVehicleInput(vehicleData, i_VehicleType, licensePlate);
