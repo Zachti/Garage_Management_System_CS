@@ -13,7 +13,7 @@ namespace Garage {
             {
                 throw new ArgumentException(
                     string.Format(
-                    "The vehicle is already in {0} status",
+                    "The vehicle is already in '{0}' status",
                     Status));
             }
         }

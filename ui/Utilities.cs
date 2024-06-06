@@ -3,13 +3,13 @@ using System.Text;
 namespace Garage {
     internal class Utilities {
         
-        public static float[] GetFloatArray(int i_WheelsNumber) {
+        public static float[] WheelsDataToArray(int i_ArrayLength) {
             string input = GetInputOrEmpty();
             string[] splitInput = input.Split(',');
 
-            if (splitInput.Length != i_WheelsNumber)
+            if (splitInput.Length != i_ArrayLength && splitInput.Length != 1)
             {
-                throw new FormatException($"Input must contain state for {i_WheelsNumber} wheels.");
+                throw new FormatException($"Input must contain state for {i_ArrayLength} wheels.");
             }
 
             if (!splitInput.All(str => float.TryParse(str, out _)))
@@ -17,7 +17,9 @@ namespace Garage {
                 throw new FormatException("Input must contain only numeric digits.");
             }
 
-            return splitInput.Select(float.Parse).ToArray();
+            float[] wheelsData = splitInput.Select(float.Parse).ToArray();
+            return wheelsData.Length == 1 ? Enumerable.Repeat(wheelsData[0], i_ArrayLength).ToArray() : wheelsData;
+
         }
         
         public static T GetNumber<T>() where T : IConvertible

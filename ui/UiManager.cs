@@ -57,10 +57,13 @@ namespace Garage {
         }
     
         private void handleAddVehicle() {
+                getLicensePlate(out string licensePlate);
+                if (!Garage.TryToMoveVehicleToRepair(licensePlate)) {
                 Utilities.EnumToMenu<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
                 VehicleInputTransformer inputTransformer = getTransformer(out eSupportVehicles vehicleType);
-                AddVehicleInput addVehicleInput = createAddVehicleInput(inputTransformer, vehicleType);
+                AddVehicleInput addVehicleInput = createAddVehicleInput(inputTransformer, vehicleType, licensePlate);
                 Garage.AddVehicle(addVehicleInput);
+                }
         }
     
         private void handlePrintLicensePlatesOrderByFilter() {
@@ -119,10 +122,9 @@ namespace Garage {
             o_LicensePlate = Utilities.GetNumberAsString(7, 8, "license plate number must contain between 7 and 8 digits.");
         }
     
-        private AddVehicleInput createAddVehicleInput(VehicleInputTransformer i_Transformer, eSupportVehicles i_VehicleType) {
+        private AddVehicleInput createAddVehicleInput(VehicleInputTransformer i_Transformer, eSupportVehicles i_VehicleType, string i_LicensePlate) {
             VehicleData vehicleData = i_Transformer.Transform(i_VehicleType);
-            getLicensePlate(out string licensePlate);
-            return new AddVehicleInput(vehicleData, i_VehicleType, licensePlate);
+            return new AddVehicleInput(vehicleData, i_VehicleType, i_LicensePlate);
         }
     
         private VehicleFilter? getVehicleFilter() {

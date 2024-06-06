@@ -39,8 +39,8 @@ namespace Garage {
         }
 
         private float[] getWheelsPressure(eWheelsNumber i_WheelsNumber) {
-            Console.WriteLine("Please enter the wheels pressure, separated by a comma");
-            return Utilities.GetFloatArray((int)i_WheelsNumber);
+            Console.WriteLine("Please enter the wheels pressure, separated by a comma or one pressure for all wheels: ");
+            return Utilities.WheelsDataToArray((int)i_WheelsNumber);
         }
     
         private string getManufacturer() {

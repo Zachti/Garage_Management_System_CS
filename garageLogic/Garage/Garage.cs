@@ -3,18 +3,16 @@ namespace Garage {
     internal class Garage {
         private Dictionary<string, GarageEntry> GarageEntries {get;} = [];
 
-        public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
-            if ( isVehicleExists(i_AddVehicleInput.i_LicensePlate) ) 
+        public bool TryToMoveVehicleToRepair(string i_LicensePlate) {
+            bool isVehicleExist = GarageEntries.ContainsKey(i_LicensePlate);
+            if ( isVehicleExist ) 
             {
-                ChangeCarStatus(i_AddVehicleInput.i_LicensePlate, eCarStatus.InRepair);
+                ChangeCarStatus(i_LicensePlate, eCarStatus.InRepair);
             }
-            else 
-            {
-                addNewVehicle(i_AddVehicleInput);
-            }
+            return isVehicleExist;
         }
     
-        private void addNewVehicle(AddVehicleInput i_AddVehicleInput) {
+        public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
             BasicVehicleData basicVehicleData = i_AddVehicleInput.i_VehicleData.i_BasicVehicleData;
             VehicleData extendedVehicleData = i_AddVehicleInput.i_VehicleData;
             Vehicle vehicle = VehicleFactory.CreateVehicle(i_AddVehicleInput.i_SelectedVehicleType, i_AddVehicleInput.i_LicensePlate, basicVehicleData.i_Model, basicVehicleData.i_Wheels,basicVehicleData.i_Engine, extendedVehicleData.i_MotorLicenseType, extendedVehicleData.i_EngineVolume, extendedVehicleData.i_CarColor, extendedVehicleData.i_NumberOfDoors, extendedVehicleData.i_IsCarryingDangerousMaterials, extendedVehicleData.i_CargoVolume);
@@ -40,7 +38,5 @@ namespace Garage {
         public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
    
         public string GetVehicleInfoByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].ToString();
-
-        private bool isVehicleExists(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     }
 }
