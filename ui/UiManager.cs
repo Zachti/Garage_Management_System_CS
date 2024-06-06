@@ -65,9 +65,9 @@ namespace Garage {
     
         private void handlePrintLicensePlatesOrderByFilter() {
                 VehicleFilter? filter = getVehicleFilter();
-                List<string> vehicles = Garage.GetAllLicensePlatesRegistered(filter);
+                List<string> licensePlates = Garage.GetAllLicensePlatesRegistered(filter);
                 StringBuilder output = new StringBuilder();
-                foreach (string licensePlate in vehicles)
+                foreach (string licensePlate in licensePlates)
                 {
                     output.AppendLine(licensePlate);
                 }

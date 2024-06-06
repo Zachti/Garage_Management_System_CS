@@ -16,7 +16,7 @@ namespace Garage {
             Console.WriteLine("Please enter your name");
             customerName = Utilities.GetAlphabeticString();
             Console.WriteLine("Please enter your phone number, note that a valid phone number is 9 or 10 digits long");
-            customerPhoneNumber = Utilities.GetNumberAsString(9, 10);
+            customerPhoneNumber = Utilities.GetNumberAsString(9, 10, "phone number must be 9 or 10 digits long");
             return new Owner(customerName, customerPhoneNumber);
         }
     
