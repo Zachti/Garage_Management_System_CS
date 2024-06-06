@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Garage
 {
     internal record CreateVehicleInput(string i_Model, string i_LicensePlate, List<Wheel> i_Wheels, Engine i_Engine);
@@ -23,25 +25,23 @@ namespace Garage
             LeftEnergyPercentage = Engine.getLeftEnergyPercentage();
         }
 
-        public string VehicleDetails()
-        {
-            string result;
-
-            result = string.Format(
+        public override string ToString() {
+            StringBuilder wheelsInfo = new StringBuilder();
+            foreach (Wheel wheel in Wheels)
+            {
+                wheelsInfo.AppendLine(wheel.ToString());
+            }
+           return string.Format(
                 @"Vehicel license plate: {0}
                 Vehicel model name: {1}
-                Wheels information: 
-                {2}
+                Wheels information: {2}
                 Energy meter: {3}%
                 {4}",
                 LicensePlate,
                 Model,
-                Wheels[0].ToString(),
+                wheelsInfo.ToString(),
                 LeftEnergyPercentage,
                 Engine.ToString());
-                return result;         
         }
-
-        public abstract override string ToString();
     }
 }

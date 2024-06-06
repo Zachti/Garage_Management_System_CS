@@ -7,16 +7,13 @@ namespace Garage {
         private int EngineVolume { get; } = i_Dto.i_EngineVolume;
 
         public override sealed string ToString() {
-               string result;
-
-            result = string.Format(
+            return string.Format(
             @"{0}
             Motorcycle's license type: {1}
             Motorcycle's engine cpacity: {2}",
-            VehicleDetails(),
+            base.ToString(),
             LicenseType.ToString(),
             EngineVolume );
-            return result;
         }
     }
 }

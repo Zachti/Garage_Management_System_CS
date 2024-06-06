@@ -9,14 +9,10 @@ namespace Garage {
         public override sealed string ToString() {
             return string.Format(
                 @"{0}
-                Truck's Color: {1}
-                Truck's door quantity: {2}
-                Truck's carrying dangerous materials: {3}
-                Truck's cargo volume: {4}
+                Truck's carrying dangerous materials: {1}
+                Truck's cargo volume: {2}
                 ",
-                VehicleDetails(),
-                Color,
-                NumberOfDoors,
+                base.ToString().Replace("Car", "Truck"),
                 IsCarryingDangerousMaterials,
                 CargoVolume);
         }
