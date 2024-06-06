@@ -58,7 +58,7 @@ namespace Garage {
     
         private void handleAddVehicle() {
                 Utilities.EnumToMenu<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
-                VehicleInputTransformer inputTransformer = getVehicleInputTransformer(out eSupportVehicles vehicleType);
+                VehicleInputTransformer inputTransformer = getTransformer(out eSupportVehicles vehicleType);
                 AddVehicleInput addVehicleInput = getAddVehicleInput(inputTransformer, vehicleType);
                 Garage.AddVehicle(addVehicleInput);
         }
@@ -109,7 +109,7 @@ namespace Garage {
             IsUserWantToExit = true;
         }
     
-        private VehicleInputTransformer getVehicleInputTransformer(out eSupportVehicles io_VehicleType) {
+        private VehicleInputTransformer getTransformer(out eSupportVehicles io_VehicleType) {
              io_VehicleType = (eSupportVehicles)Utilities.GetSingleDigit();
              return TransformerFactory.CreateTransformer(io_VehicleType);
         }
