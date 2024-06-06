@@ -100,7 +100,7 @@ namespace Garage {
     
         private static void validateNumberInRange(int i_Number, int i_Min, int i_Max) {
             if (i_Number < i_Min || i_Number > i_Max) {
-                throw new ValueOutOfRangeException(new Exception("Invalid input, please try again"), i_Min, i_Max);
+                throw new ValueOutOfRangeException(i_Number, i_Min, i_Max);
             }
         }
     

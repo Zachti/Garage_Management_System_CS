@@ -12,8 +12,8 @@ namespace Garage {
         {
             if (isInflateImpossible(i_PressureToAdd))
             {    
-                Exception ex = new Exception("Cannot inflate tire, pressure will exceed maximum pressure");
-                throw new ValueOutOfRangeException(ex, 0, MaxPressure - Pressure);
+                string errorMessage = string.Format("Cannot inflate tire, pressure will exceed maximum pressure");
+                throw new ValueOutOfRangeException(i_PressureToAdd, 0, MaxPressure - Pressure, errorMessage);
             }
             Pressure += i_PressureToAdd;
         }

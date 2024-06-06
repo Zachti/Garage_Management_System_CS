@@ -15,8 +15,8 @@ namespace Garage {
 
         protected void EnsureEnergySupplyIsValid(float i_AmountToAdd) {
             if (isSupplyEnergyImpossible(i_AmountToAdd)) {
-                Exception ex = new Exception("Cannot recharge more than the maximum possible capacity");
-                throw new ValueOutOfRangeException(ex, 0, getMaxCapacityPossible());
+                string errorMessage = String.Format("Cannot supply energy more than the maximum possible capacity");
+                throw new ValueOutOfRangeException(i_AmountToAdd, 0, getMaxCapacityPossible(), errorMessage);
             }
         }
 

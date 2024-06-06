@@ -1,9 +1,9 @@
 namespace Garage {
     
-    public class ValueOutOfRangeException : Exception
+    internal class ValueOutOfRangeException : Exception
     {
         
-        internal ValueOutOfRangeException(Exception i_InnerException, float i_MinValue, float i_MaxValue) :
-            base($"Value was not in the range of {i_MinValue} - {i_MaxValue}", i_InnerException) {}
+    internal ValueOutOfRangeException(float i_Value, float i_Min, float i_Max, string? additionalMessage = null)
+        : base($"{additionalMessage ?? string.Empty}\n Value '{i_Value}' is out of range. Allowed range: [{i_Min}, {i_Max}].") {}
     }
 }

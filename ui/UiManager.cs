@@ -10,8 +10,8 @@ namespace Garage {
             printWelcomeMessage();
             while (!IsUserWantToExit) {
                 printMainMenu();
-                eMainMenuOptions userChoice = (eMainMenuOptions)Utilities.GetSingleDigit();
                 try {
+                    eMainMenuOptions userChoice = (eMainMenuOptions)Utilities.GetSingleDigit();
                     executeChoice(userChoice);
                 }
                 catch (Exception ex) {
@@ -52,7 +52,7 @@ namespace Garage {
                     handleGarageExit();
                     break;
                 default:
-                    throw new ValueOutOfRangeException(new Exception("Invalid input, please try again"), (float)eMainMenuOptions.AddVehicle, (float)eMainMenuOptions.Exit);
+                    throw new ValueOutOfRangeException((float)i_UserChoice, (float)eMainMenuOptions.AddVehicle, (float)eMainMenuOptions.Exit);
             }
         }
     
@@ -117,7 +117,7 @@ namespace Garage {
                 eSupportVehicles.Motorcycle or eSupportVehicles.ElectricMotorcycle => TransformerFactory.CreateTransformer(eVehicleTransformerTypes.Motorcycle),
                 eSupportVehicles.Car or eSupportVehicles.ElectricCar => TransformerFactory.CreateTransformer(eVehicleTransformerTypes.Car),
                 eSupportVehicles.Truck => TransformerFactory.CreateTransformer(eVehicleTransformerTypes.Truck),
-                _ => throw new ValueOutOfRangeException(new Exception("Invalid input, please try again"), (float)eSupportVehicles.Motorcycle, (float)eSupportVehicles.Truck)
+                _ => throw new ValueOutOfRangeException((float)o_VehicleType, (float)eSupportVehicles.Motorcycle, (float)eSupportVehicles.Truck)
             };
         }
     
