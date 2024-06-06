@@ -4,9 +4,9 @@ namespace Garage {
     
     internal class Wheel(CreateWheelInput i_Dto)
     {
-        private string Manufacturer { get;} = i_Dto.i_Manufacturer;
+        private string Manufacturer { get; } = i_Dto.i_Manufacturer;
         private float Pressure { get; set; } = i_Dto.i_Pressure;
-        private float MaxPressure { get;} = i_Dto.i_MaxPressure;
+        private float MaxPressure { get; } = i_Dto.i_MaxPressure;
 
         public void TireInflation(float i_PressureToAdd)
         {
