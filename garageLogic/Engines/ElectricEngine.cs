@@ -1,6 +1,6 @@
 namespace Garage {
    
-    internal class ElectricEngine(float i_MaxCapacity) : Engine(i_MaxCapacity) 
+    internal class ElectricEngine(float i_MaxCapacity, float i_CurrentCapacity) : Engine(i_MaxCapacity, i_CurrentCapacity) 
     {
         public override sealed string ToString()
             {

@@ -52,5 +52,11 @@ namespace Garage {
             Console.WriteLine("Please enter the vehicle model");
             return Utilities.GetAlphabeticString();
         }
+    
+
+        protected void getCurrentEngineEnergy(out float o_CurrentEnergy) {
+            Console.WriteLine("Please enter the current engine energy amount (fuel/battery):");
+            o_CurrentEnergy = Utilities.GetNumber<float>();
+        }
     }
 }   

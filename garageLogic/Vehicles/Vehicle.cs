@@ -32,7 +32,8 @@ namespace Garage
            return string.Format(
                 @"Vehicel license plate: {0}
                 Vehicel model name: {1}
-                Wheels information: {2}
+                Wheels information: 
+                {2}
                 {3}",
                 LicensePlate,
                 Model,

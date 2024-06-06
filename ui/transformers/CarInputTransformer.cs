@@ -6,13 +6,15 @@ namespace Garage
         private const float k_MaxFuelAmount = 45f;
         private const float k_MaxBatteryTime = 3.5f;
 
-        protected override Engine getEngineData(eEngineType i_EngineType) =>
-            i_EngineType switch
+        protected override Engine getEngineData(eEngineType i_EngineType) {
+            getCurrentEngineEnergy( out float currentEnergy);
+            return i_EngineType switch
             {
-                eEngineType.Fuel => new FuelEngine(k_MaxFuelAmount, eFuelType.Octan95),
-                eEngineType.Electric => new ElectricEngine(k_MaxBatteryTime),
+                eEngineType.Fuel => new FuelEngine(k_MaxFuelAmount, currentEnergy, eFuelType.Octan95),
+                eEngineType.Electric => new ElectricEngine(k_MaxBatteryTime, currentEnergy),
                 _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
             };
+        }
 
         protected override List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
             i_Wheels.Select(wheelPressure =>
@@ -34,6 +36,5 @@ namespace Garage
     
         private eCarNumberOfDoors getNumberOfDoors() =>
             Utilities.EnumMenuToEnumChoice<eCarNumberOfDoors>("Please enter the number of doors from the options below:");
-
     }
 }
