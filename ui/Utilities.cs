@@ -76,7 +76,7 @@ namespace Garage {
     
         public static void EnumToMenu<TEnum>(string? i_OpenMessage) where TEnum : Enum
         {
-            StringBuilder menu = new StringBuilder(i_OpenMessage ?? "");
+            StringBuilder menu = new StringBuilder(i_OpenMessage ?? "").AppendLine();
             int index = 1;
             foreach (TEnum value in Enum.GetValues(typeof(TEnum)))
             {
