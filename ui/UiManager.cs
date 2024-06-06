@@ -70,11 +70,17 @@ namespace Garage {
                 VehicleFilter? filter = getVehicleFilter();
                 List<string> licensePlates = Garage.GetAllLicensePlatesRegistered(filter);
                 StringBuilder output = new StringBuilder();
-                foreach (string licensePlate in licensePlates)
+                if (licensePlates.Count > 0)
                 {
-                    output.AppendLine(licensePlate);
+                    foreach (string licensePlate in licensePlates)
+                    {
+                        output.AppendLine(licensePlate);
+                    }
                 }
-
+                else
+                {
+                    output.AppendLine("No vehicles found.");
+                }
                  Console.WriteLine(output.ToString());
         }
 

@@ -25,9 +25,9 @@ namespace Garage {
             Vehicle status: {1}
             {2}
             ",
-            Owner.ToString(),
+            Owner.ToString().TrimStart(),
             Status,
-            Vehicle.ToString()
+            Vehicle.ToString().TrimStart()
             );
         }
     }

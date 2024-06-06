@@ -12,7 +12,7 @@ namespace Garage {
                 Car's Color: {1}
                 Car's door quantity: {2}
                 ",
-                base.ToString(),
+                base.ToString().TrimStart(),
                 Color,
                 NumberOfDoors);
         }

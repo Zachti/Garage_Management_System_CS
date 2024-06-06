@@ -12,7 +12,7 @@ namespace Garage {
                 Truck's carrying dangerous materials: {1}
                 Truck's cargo volume: {2}
                 ",
-                base.ToString().Replace("Car", "Truck"),
+                base.ToString().Replace("Car", "Truck").TrimStart(),
                 IsCarryingDangerousMaterials,
                 CargoVolume);
         }

@@ -94,7 +94,7 @@ namespace Garage {
         }
         
         public static int EnumMenuToIntChoiceWithValidation<T>(string i_Message, int i_Min, int i_Max) where T : Enum {
-            EnumMenuToEnumChoice<T>(i_Message);
+            EnumToMenu<T>(i_Message);
             int choice = GetSingleDigit();
             ValidateNumberInRange(choice, i_Min, i_Max);
             return choice;

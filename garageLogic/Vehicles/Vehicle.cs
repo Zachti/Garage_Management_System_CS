@@ -37,8 +37,8 @@ namespace Garage
                 {3}",
                 LicensePlate,
                 Model,
-                wheelsInfo.ToString(),
-                Engine.ToString());
+                wheelsInfo.ToString().TrimStart(),
+                Engine.ToString().TrimStart());
         }
     }
 }
