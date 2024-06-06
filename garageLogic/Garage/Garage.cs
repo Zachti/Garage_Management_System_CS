@@ -4,12 +4,12 @@ namespace Garage {
         private Dictionary<string, GarageEntry> GarageEntries {get;} = [];
 
         public bool TryToMoveVehicleToRepair(string i_LicensePlate) {
-            bool isVehicleExist = GarageEntries.ContainsKey(i_LicensePlate);
-            if ( isVehicleExist ) 
+            bool isExist = isVehicleExist(i_LicensePlate);
+            if ( isExist ) 
             {
                 ChangeCarStatus(i_LicensePlate, eCarStatus.InRepair);
             }
-            return isVehicleExist;
+            return isExist;
         }
     
         public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
@@ -28,6 +28,10 @@ namespace Garage {
         }
     
         public void ChangeCarStatus(string i_LicensePlate, eCarStatus i_NewStatus) {
+            if (!isVehicleExist(i_LicensePlate)) 
+            {
+                throw new ArgumentException("Vehicle does not exist in the garage");
+            }
             GarageEntry entry = GarageEntries[i_LicensePlate];
             entry.CheckEqualStatus(i_NewStatus);
             entry.Status = i_NewStatus;
@@ -38,5 +42,7 @@ namespace Garage {
         public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) => GarageEntries[i_LicensePlate].Vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
    
         public string GetVehicleInfoByLicensePlate(string i_LicensePlate) => GarageEntries[i_LicensePlate].ToString();
+
+        private bool isVehicleExist(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     }
 }
