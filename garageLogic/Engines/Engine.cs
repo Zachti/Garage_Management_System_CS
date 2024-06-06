@@ -11,7 +11,7 @@ namespace Garage {
             CurrentCapacity += i_AmountToAdd;
         }
 
-        public float getLeftEnergyPercentage() => CurrentCapacity / MaxCapacity * 100f;
+        public float GetLeftEnergyPercentage() => CurrentCapacity / MaxCapacity * 100f;
 
         protected void EnsureEnergySupplyIsValid(float i_AmountToAdd) {
             if (isSupplyEnergyImpossible(i_AmountToAdd)) {

@@ -8,7 +8,7 @@ namespace Garage
     {
         private string Model { get; } = i_Dto.i_Model;
         private string LicensePlate { get; } = i_Dto.i_LicensePlate;
-        private float LeftEnergyPercentage { get; set; } = i_Dto.i_Engine.getLeftEnergyPercentage();
+        private float LeftEnergyPercentage { get; set; } = i_Dto.i_Engine.GetLeftEnergyPercentage();
         private List<Wheel> Wheels { get; } = i_Dto.i_Wheels;
         private Engine Engine { get; } = i_Dto.i_Engine;
 
@@ -22,7 +22,7 @@ namespace Garage
     
         public void SupplyEnergy(eFuelType? i_FuelType, float i_AmountToAdd) {
             Engine.SupplyEnergy(i_AmountToAdd, i_FuelType);
-            LeftEnergyPercentage = Engine.getLeftEnergyPercentage();
+            LeftEnergyPercentage = Engine.GetLeftEnergyPercentage();
         }
 
         public override string ToString() {
