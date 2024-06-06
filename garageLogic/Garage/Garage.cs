@@ -1,7 +1,7 @@
 namespace Garage {
     
     internal class Garage {
-        private Dictionary<string, GarageEntry> GarageEntries {get; set; } = [];
+        private Dictionary<string, GarageEntry> GarageEntries {get;} = [];
 
         public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
             if ( isVehicleExists(i_AddVehicleInput.i_LicensePlate) ) 
