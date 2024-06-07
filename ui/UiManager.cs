@@ -9,9 +9,8 @@ namespace Garage {
         public void Start() {
             printWelcomeMessage();
             while (!IsUserWantToExit) {
-                printMainMenu();
                 try {
-                    eMainMenuOptions userChoice = (eMainMenuOptions)Utilities.GetSingleDigit();
+                    eMainMenuOptions userChoice = displayMainMenuAndGetChoice();
                     executeChoice(userChoice);
                 }
                 catch (Exception ex) {
@@ -20,8 +19,8 @@ namespace Garage {
             }
         }
 
-        private static void printMainMenu() =>
-           Utilities.EnumToMenu<eMainMenuOptions>("Please choose which action to make by inserting a chioce number below: ");
+        private static eMainMenuOptions displayMainMenuAndGetChoice() =>
+           Utilities.EnumMenuToEnumChoice<eMainMenuOptions>("Please choose which action to make by inserting a chioce number below: ");
     
         private void executeChoice(eMainMenuOptions i_UserChoice)
         {
