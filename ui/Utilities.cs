@@ -82,7 +82,7 @@ namespace Garage {
             int index = 1;
             foreach (TEnum value in Enum.GetValues(typeof(TEnum)))
             {
-                menu.AppendLine($"{index}. {value}");
+                menu.AppendLine($"{index}. {value.ToString().Replace("_", " ")}");
                 index++;
             }
             Console.WriteLine(menu.ToString());

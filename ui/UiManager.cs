@@ -27,32 +27,32 @@ namespace Garage {
         {
             switch (i_UserChoice)
             {
-                case eMainMenuOptions.AddVehicle:
+                case eMainMenuOptions.Add_vehicle:
                     handleAddVehicle();
                     break;
-                case eMainMenuOptions.PrintLicensePlatesOrderByFilter:
+                case eMainMenuOptions.Show_all_license_plates_in_the_system_filtered_by_status:
                     handlePrintLicensePlatesOrderByFilter();
                     break;
-                case eMainMenuOptions.UpdateVechileState:
+                case eMainMenuOptions.Update_vechile_status:
                     handleUpdateVechileState();
                     break;
-                case eMainMenuOptions.InflateAllWheelsToMax:
+                case eMainMenuOptions.Inflate_all_wheels_to_max:
                     handleInflateAllWheelsToMax();
                     break;
-                case eMainMenuOptions.RefuelVehicle:
+                case eMainMenuOptions.Refuel_vehicle:
                     handleRefuelVehicle();
                     break;
-                case eMainMenuOptions.ChargeVehicle:
+                case eMainMenuOptions.Charge_vehicle:
                     handleChargeVehicle();
                     break;
-                case eMainMenuOptions.DisplayFullVehicleDetails:
+                case eMainMenuOptions.Display_full_vehicle_details:
                     handleDisplayFullVehicleDetails();
                     break;
                 case eMainMenuOptions.Exit:
                     handleGarageExit();
                     break;
                 default:
-                    throw new ValueOutOfRangeException((float)i_UserChoice, (float)eMainMenuOptions.AddVehicle, (float)eMainMenuOptions.Exit);
+                    throw new ValueOutOfRangeException((float)i_UserChoice, (float)eMainMenuOptions.Add_vehicle, (float)eMainMenuOptions.Exit);
             }
         }
     
