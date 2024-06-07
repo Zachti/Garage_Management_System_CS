@@ -1,14 +1,9 @@
 namespace Garage {
     internal sealed class TruckFactory : CarFactory {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
-        protected override float MaxEnergy {get; set; } = 120f;
+        protected override float MaxEnergy => 120f;
 
-        protected override sealed Engine getEngineData(eEngineType i_EngineType) {
-            return i_EngineType switch {
-                eEngineType.Fuel => new FuelEngine(MaxEnergy, eFuelType.Solar),
-                _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
-            };
-        }
+        protected override sealed Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Solar);
 
         protected override sealed List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
             i_Wheels.Select(wheelPressure =>

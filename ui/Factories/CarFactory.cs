@@ -3,19 +3,9 @@ namespace Garage
     internal class CarFactory : VehicleFactory
     {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Car;
-        private const float k_MaxFuelAmount = 45f;
-        private const float k_MaxBatteryTime = 3.5f;
-        protected override float MaxEnergy {get; set; }
+        protected override float MaxEnergy => 45f;
        
-        protected override Engine getEngineData(eEngineType i_EngineType) {
-            MaxEnergy = getMaxEnergByType(k_MaxFuelAmount, k_MaxBatteryTime, i_EngineType);
-            return i_EngineType switch
-            {
-                eEngineType.Fuel => new FuelEngine(k_MaxFuelAmount, eFuelType.Octan95),
-                eEngineType.Electric => new ElectricEngine(k_MaxBatteryTime),
-                _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
-            };
-        }
+        protected override Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Octan95);
 
         protected override List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
             i_Wheels.Select(wheelPressure =>

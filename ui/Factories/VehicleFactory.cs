@@ -4,9 +4,9 @@ namespace Garage {
 
     internal abstract class VehicleFactory {
         protected abstract eWheelsNumber WheelsNumber { get; }
-        protected abstract float MaxEnergy {get; set; }
+        protected abstract float MaxEnergy { get; }
         
-        protected abstract Engine getEngineData(eEngineType i_EngineType);
+        protected abstract Engine getEngineData();
 
         protected abstract List<Wheel> getWheelData(float[] i_WheelsPressure, string i_Manufacturer);
 
@@ -22,7 +22,7 @@ namespace Garage {
         }
     
         public virtual void CreateGarageEntry(eSupportVehicles i_VehicleType, Garage i_Garage, string i_LicensePlate) {
-            Engine engine = getEngineData(getEngineType(i_VehicleType));
+            Engine engine = getEngineData();
             Vehicle vehicle = CreateVehicleStrategy.CreateVehicle(i_VehicleType, i_LicensePlate, engine);
             Owner owner = getOwnerDetails();
             UpdateVehicleInput updateVehicleInput = getUpdateVehicleInput();
@@ -34,14 +34,6 @@ namespace Garage {
             List<Wheel> wheels = getWheelData(getWheelsPressure(WheelsNumber), getManufacturer());
             string model = getModel();
             return new CommonVehicleData(wheels, model);
-        }
-
-        protected eEngineType getEngineType(eSupportVehicles i_VehicleType) {
-            return i_VehicleType switch {
-                eSupportVehicles.ElectricCar or eSupportVehicles.ElectricMotorcycle => eEngineType.Electric,
-                eSupportVehicles.Car or eSupportVehicles.Motorcycle or eSupportVehicles.Truck => eEngineType.Fuel,
-                _ => throw new ArgumentException("Invalid vehicle type", nameof(i_VehicleType))
-            };
         }
 
         private float[] getWheelsPressure(eWheelsNumber i_WheelsNumber) {
