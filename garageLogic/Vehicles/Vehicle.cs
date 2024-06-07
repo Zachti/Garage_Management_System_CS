@@ -29,7 +29,7 @@ namespace Garage
             StringBuilder wheelsInfo = new StringBuilder();
             foreach (int index in Enumerable.Range(0, Wheels.Count))
             {
-                wheelsInfo.AppendLine($"Wheel No. {index + 1}: {Wheels[index].ToString()}");
+                wheelsInfo.AppendLine($"Wheel No. {index + 1}: {Wheels[index].ToString()}").AppendLine();
             }
            return string.Format(
                 @"Vehicel license plate: {0}
@@ -39,8 +39,8 @@ Wheels information:
 {3}",
                 LicensePlate,
                 Model,
-                wheelsInfo.ToString().TrimStart(),
-                Engine.ToString().TrimStart());
+                wheelsInfo.ToString(),
+                Engine.ToString());
         }
     
         public bool IsElectricVehicle() => Engine is ElectricEngine;

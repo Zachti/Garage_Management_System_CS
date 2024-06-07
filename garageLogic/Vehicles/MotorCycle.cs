@@ -9,8 +9,8 @@ namespace Garage {
             @"{0}
 Motorcycle's license type: {1}
 Motorcycle's engine cpacity: {2}",
-            base.ToString().TrimStart(),
-            LicenseType.ToString().TrimStart(),
+            base.ToString(),
+            LicenseType.ToString(),
             EngineVolume );
         }
 

@@ -109,7 +109,8 @@ namespace Garage {
     
         private void handleDisplayFullVehicleDetails() {
                 getLicensePlate(out string licensePlate);
-                Console.WriteLine(Garage.GetVehicleInfoByLicensePlate(licensePlate));
+                StringBuilder vehicleInfo = new StringBuilder(Garage.GetVehicleInfoByLicensePlate(licensePlate)).AppendLine();
+                Console.WriteLine(vehicleInfo.ToString());
         }
     
         private void handleGarageExit() {
