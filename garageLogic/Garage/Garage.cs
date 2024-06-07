@@ -1,3 +1,5 @@
+using System.Xml.Serialization;
+
 namespace Garage {
     
     internal class Garage {
@@ -11,14 +13,10 @@ namespace Garage {
             }
             return isExist;
         }
-    
-        public void AddVehicle(AddVehicleInput i_AddVehicleInput) {
-            BasicVehicleData basicVehicleData = i_AddVehicleInput.i_VehicleData.i_BasicVehicleData;
-            VehicleData extendedVehicleData = i_AddVehicleInput.i_VehicleData;
-            Vehicle vehicle = GarageStrategy.CreateVehicle(i_AddVehicleInput.i_SelectedVehicleType, i_AddVehicleInput.i_LicensePlate, basicVehicleData.i_Model, basicVehicleData.i_Wheels,basicVehicleData.i_Engine, extendedVehicleData.i_MotorLicenseType, extendedVehicleData.i_EngineVolume, extendedVehicleData.i_CarColor, extendedVehicleData.i_NumberOfDoors, extendedVehicleData.i_IsCarryingDangerousMaterials, extendedVehicleData.i_CargoVolume);
-            GarageEntries.Add(i_AddVehicleInput.i_LicensePlate, new GarageEntry(new CreateGarageEntryInput(vehicle, basicVehicleData.i_Owner)));
-        }
-    
+
+        public void AddVehicle(AddVehicleInput i_AddVehicleInput) =>
+            GarageEntries.Add(i_AddVehicleInput.i_LicensePlate, new GarageEntry(new CreateGarageEntryInput(i_AddVehicleInput.i_Vehicle, i_AddVehicleInput.i_Owner)));
+
         public List<string> GetAllLicensePlatesRegistered(VehicleFilter? i_Filter) 
         {
             return GarageEntries

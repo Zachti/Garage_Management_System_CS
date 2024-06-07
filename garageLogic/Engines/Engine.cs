@@ -1,8 +1,8 @@
 namespace Garage {
     
-    internal abstract class Engine(float i_MaxCapacity, float i_CurrentCapacity) {
+    internal abstract class Engine(float i_MaxCapacity) {
         protected float MaxCapacity { get; } = i_MaxCapacity;
-        protected float CurrentCapacity { get; set; } = i_CurrentCapacity;
+        public float CurrentCapacity { get; set; }
         protected float LeftEnergyPercentage => CurrentCapacity / MaxCapacity * 100;
 
         private float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;

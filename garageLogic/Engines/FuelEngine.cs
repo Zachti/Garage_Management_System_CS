@@ -1,6 +1,6 @@
 namespace Garage {
     
-    internal sealed class FuelEngine(float i_MaxCapacity, float i_CurrentCapacity, eFuelType i_FuelType) : Engine(i_MaxCapacity, i_CurrentCapacity) {
+    internal sealed class FuelEngine(float i_MaxCapacity, eFuelType i_FuelType) : Engine(i_MaxCapacity) {
         private eFuelType FuelType { get;} = i_FuelType;
 
         public override sealed void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {

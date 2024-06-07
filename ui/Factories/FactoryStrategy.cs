@@ -1,7 +1,7 @@
 namespace Garage {
         
         internal class FactoryStrategy {
-            public static VehicleFactory CreateTransformer(eSupportVehicles i_VehicleType) =>
+            public static VehicleFactory CreateFactory(eSupportVehicles i_VehicleType) =>
                 i_VehicleType switch {
                     eSupportVehicles.Motorcycle or eSupportVehicles.ElectricMotorcycle => new MotorCycleFactory(),
                     eSupportVehicles.Car or eSupportVehicles.ElectricCar => new CarFactory(),

@@ -1,9 +1,8 @@
-using System.Dynamic;
-
 namespace Garage {
     
     internal abstract class VehicleFactory {
         protected abstract eWheelsNumber WheelsNumber { get; }
+        protected abstract float MaxEnergy {get; set; }
         
         protected abstract Engine getEngineData(eEngineType i_EngineType);
 
@@ -20,17 +19,16 @@ namespace Garage {
             return new Owner(customerName, customerPhoneNumber);
         }
     
-        public abstract VehicleData CreateVehicle(eSupportVehicles i_VehicleType);
+        public abstract void CreateGarageEntry(eSupportVehicles i_VehicleType, Garage i_Garage, string i_LicensePlate);
         
-        protected BasicVehicleData getBasicVehicleData(eSupportVehicles i_VehicleType) {
-            Engine engine = getEngineData(getEngineType(i_VehicleType));
+        protected CommonVehicleData getCommonVehicleData() {
             List<Wheel> wheels = getWheelData(getWheelsPressure(WheelsNumber), getManufacturer());
             Owner owner = getOwnerDetails();
             string model = getModel();
-            return new BasicVehicleData(engine, wheels, owner, model);
+            return new CommonVehicleData(wheels, owner, model);
         }
 
-        private eEngineType getEngineType(eSupportVehicles i_VehicleType) {
+        protected eEngineType getEngineType(eSupportVehicles i_VehicleType) {
             return i_VehicleType switch {
                 eSupportVehicles.ElectricCar or eSupportVehicles.ElectricMotorcycle => eEngineType.Electric,
                 eSupportVehicles.Car or eSupportVehicles.Motorcycle or eSupportVehicles.Truck => eEngineType.Fuel,
