@@ -3,7 +3,7 @@ namespace Garage {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
         protected override float MaxEnergy => 120f;
 
-        protected override sealed Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Solar);
+        protected override sealed Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Soler);
 
         protected override sealed List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
             i_Wheels.Select(wheelPressure =>

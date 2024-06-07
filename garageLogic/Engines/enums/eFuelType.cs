@@ -3,6 +3,6 @@ namespace Garage {
         Octan95 = 1,
         Octan96,
         Octan98,
-        Solar
+        Soler
     }
 }

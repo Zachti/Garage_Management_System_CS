@@ -134,7 +134,7 @@ namespace Garage {
         }
 
         private eFuelType getFuelType() =>
-            (eFuelType)Utilities.EnumMenuToIntChoiceWithValidation<eFuelType>("Please enter the fuel type you want to add:", (int)eFuelType.Octan95, (int)eFuelType.Solar);
+            (eFuelType)Utilities.EnumMenuToIntChoiceWithValidation<eFuelType>("Please enter the fuel type you want to add:", (int)eFuelType.Octan95, (int)eFuelType.Soler);
     
         private static void getAmountToAdd(out float o_AmountToAdd) {
             Console.WriteLine("Please enter the amount of fuel you want to add:");
