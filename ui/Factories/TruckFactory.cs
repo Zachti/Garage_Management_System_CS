@@ -32,7 +32,7 @@ namespace Garage {
             return Utilities.GetNumber<float>();
     }
     
-        protected override UpdateVehicleInput getUpdateVehicleInput()
+        protected override sealed UpdateVehicleInput getUpdateVehicleInput()
         {
             UpdateVehicleInput updateVehicleInput = base.getUpdateVehicleInput();
             bool isCarryingDangerousMaterials = IsTruckCarryingDangerousMaterials();

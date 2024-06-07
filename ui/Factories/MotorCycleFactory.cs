@@ -28,7 +28,7 @@ namespace Garage {
             return Utilities.GetNumber<int>();
         }
     
-        protected override UpdateVehicleInput getUpdateVehicleInput() 
+        protected override sealed UpdateVehicleInput getUpdateVehicleInput() 
         {
             CommonVehicleData commonVehicleData = getCommonVehicleData();
             getCurrentEngineEnergy(out float currentEnergy , MaxEnergy);

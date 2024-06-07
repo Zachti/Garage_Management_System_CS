@@ -65,13 +65,12 @@ namespace Garage {
             Utilities.ValidateNumberInRange(o_CurrentEnergy, 0, i_MaxEnergy, "Invalid current engine energy amount");
         }
     
-        protected float getMaxEnergByType(float i_MaxFuel, float i_MaxBattery, eEngineType i_EngineType) {
-            return  i_EngineType switch {
+        protected float getMaxEnergByType(float i_MaxFuel, float i_MaxBattery, eEngineType i_EngineType) =>
+            i_EngineType switch {
                 eEngineType.Fuel => i_MaxFuel,
                 eEngineType.Electric => i_MaxBattery,
                 _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
             };
-        }
         
         protected abstract UpdateVehicleInput getUpdateVehicleInput(); 
     }
