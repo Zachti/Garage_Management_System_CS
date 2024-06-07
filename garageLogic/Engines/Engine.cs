@@ -8,11 +8,11 @@ namespace Garage {
         private float getMaxCapacityPossible() => MaxCapacity - CurrentCapacity;
 
         public virtual void SupplyEnergy(float i_AmountToAdd, eFuelType? i_FuelType) {
-            EnsureEnergySupplyIsValid(i_AmountToAdd);
+            ensureEnergySupplyIsValid(i_AmountToAdd);
             CurrentCapacity += i_AmountToAdd;
         }
 
-        protected void EnsureEnergySupplyIsValid(float i_AmountToAdd) {
+        private void ensureEnergySupplyIsValid(float i_AmountToAdd) {
             if (isSupplyEnergyImpossible(i_AmountToAdd)) {
                 string errorMessage = String.Format("Cannot supply energy more than the maximum possible capacity");
                 throw new ValueOutOfRangeException(i_AmountToAdd, 0, getMaxCapacityPossible(), errorMessage);

@@ -28,40 +28,20 @@ namespace Garage {
         }
     
         public void ChangeCarStatus(string i_LicensePlate, eCarStatus i_NewStatus) {
-            if (!isVehicleExist(i_LicensePlate)) 
-            {
-                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
-            }
-            GarageEntry entry = GarageEntries[i_LicensePlate];
+            GarageEntry entry = getEntryOrThrow(i_LicensePlate);
             entry.CheckEqualStatus(i_NewStatus);
             entry.Status = i_NewStatus;
         }
 
-        public void InflateWheelsToMax(string i_LicensePlate) {
-            if (!isVehicleExist(i_LicensePlate)) 
-            {
-                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
-            }
-            GarageEntries[i_LicensePlate].Vehicle.InflateWheelsToMax();
-        }
+        public void InflateWheelsToMax(string i_LicensePlate) => getEntryOrThrow(i_LicensePlate).Vehicle.InflateWheelsToMax();
 
         public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) {
-            if (!isVehicleExist(i_LicensePlate)) 
-            {
-                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
-            }
-            Vehicle vehicle = GarageEntries[i_LicensePlate].Vehicle;
+            Vehicle vehicle = getEntryOrThrow(i_LicensePlate).Vehicle;
             validateEngineTypeAndOperationMatch(vehicle, i_FuelType);
             vehicle.SupplyEnergy(i_FuelType, i_AmountToAdd);
         }   
         
-        public string GetVehicleInfoByLicensePlate(string i_LicensePlate) {
-            if (!isVehicleExist(i_LicensePlate)) 
-            {
-                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
-            }
-            return GarageEntries[i_LicensePlate].ToString();
-        }
+        public string GetVehicleInfoByLicensePlate(string i_LicensePlate) => getEntryOrThrow(i_LicensePlate).ToString();
 
         private bool isVehicleExist(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
     
@@ -75,6 +55,14 @@ namespace Garage {
                 throw new ArgumentException("You can't fuel battery!");
             }
 
+        }
+    
+        private GarageEntry getEntryOrThrow(string i_LicensePlate) {
+            if (!isVehicleExist(i_LicensePlate)) 
+            {
+                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
+            }
+            return GarageEntries[i_LicensePlate];
         }
     }
 }
