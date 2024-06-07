@@ -14,15 +14,6 @@ namespace Garage {
             i_Wheels.Select(wheelPressure =>
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Truck))
             ).ToList();
-    
-        public override sealed void CreateGarageEntry(eSupportVehicles i_VehicleType, Garage i_Garage, string i_LicensePlate) 
-        {
-            Engine engine = getEngineData(getEngineType(i_VehicleType));
-            Vehicle Truck = CreateVehicleStrategy.CreateVehicle(i_VehicleType, i_LicensePlate, engine);
-            CommonVehicleData commonVehicleData = getTruckData(out float currentEnergy, out eCarColors carColor, out eCarNumberOfDoors numberOfDoors, out bool isCarryingDangerousMaterials, out float cargoVolume);
-            Truck.UpdateVehicleData(currentEnergy, commonVehicleData.i_Wheels, commonVehicleData.i_Model, carColor, numberOfDoors, isCarryingDangerousMaterials, cargoVolume);
-            i_Garage.AddVehicle(new AddVehicleInput(Truck, commonVehicleData.i_Owner, i_LicensePlate));
-        }
 
         private bool IsTruckCarryingDangerousMaterials()
         {
@@ -41,12 +32,12 @@ namespace Garage {
             return Utilities.GetNumber<float>();
     }
     
-        private CommonVehicleData getTruckData(out float o_CurrentEnergy, out eCarColors o_CarColor, out eCarNumberOfDoors o_NumberOfDoors, out bool o_IsCarryingDangerousMaterials, out float o_CargoVolume) 
+        protected override UpdateVehicleInput getUpdateVehicleInput()
         {
-            CommonVehicleData commonVehicleData = getCarData(out o_CurrentEnergy, out o_CarColor, out o_NumberOfDoors);
-            o_IsCarryingDangerousMaterials = IsTruckCarryingDangerousMaterials();
-            o_CargoVolume = getCargoVolume();
-            return commonVehicleData;
+            UpdateVehicleInput updateVehicleInput = base.getUpdateVehicleInput();
+            bool isCarryingDangerousMaterials = IsTruckCarryingDangerousMaterials();
+            float CargoVolume = getCargoVolume();
+            return updateVehicleInput with {i_IsCarryingDangerousMaterials = isCarryingDangerousMaterials, i_CargoVolume = CargoVolume};
         }
     }
 }

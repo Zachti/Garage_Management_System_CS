@@ -1,5 +1,7 @@
 namespace Garage {
-    
+
+    internal record CommonVehicleData(List<Wheel> i_Wheels, string i_Model);
+
     internal abstract class VehicleFactory {
         protected abstract eWheelsNumber WheelsNumber { get; }
         protected abstract float MaxEnergy {get; set; }
@@ -19,13 +21,19 @@ namespace Garage {
             return new Owner(customerName, customerPhoneNumber);
         }
     
-        public abstract void CreateGarageEntry(eSupportVehicles i_VehicleType, Garage i_Garage, string i_LicensePlate);
+        public virtual void CreateGarageEntry(eSupportVehicles i_VehicleType, Garage i_Garage, string i_LicensePlate) {
+            Engine engine = getEngineData(getEngineType(i_VehicleType));
+            Vehicle vehicle = CreateVehicleStrategy.CreateVehicle(i_VehicleType, i_LicensePlate, engine);
+            Owner owner = getOwnerDetails();
+            UpdateVehicleInput updateVehicleInput = getUpdateVehicleInput();
+            vehicle.UpdateVehicleData(updateVehicleInput);
+            i_Garage.AddVehicle(new AddVehicleInput(vehicle, owner, i_LicensePlate));
+        }
         
         protected CommonVehicleData getCommonVehicleData() {
             List<Wheel> wheels = getWheelData(getWheelsPressure(WheelsNumber), getManufacturer());
-            Owner owner = getOwnerDetails();
             string model = getModel();
-            return new CommonVehicleData(wheels, owner, model);
+            return new CommonVehicleData(wheels, model);
         }
 
         protected eEngineType getEngineType(eSupportVehicles i_VehicleType) {
@@ -64,5 +72,7 @@ namespace Garage {
                 _ => throw new ArgumentException("Invalid engine type", nameof(i_EngineType))
             };
         }
+        
+        protected abstract UpdateVehicleInput getUpdateVehicleInput(); 
     }
 }   

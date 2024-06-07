@@ -4,12 +4,14 @@ namespace Garage
 {
     internal record CreateVehicleInput(string i_LicensePlate, Engine i_Engine);
 
-    internal abstract class Vehicle(CreateVehicleInput i_Dto) 
+    internal record UpdateVehicleInput(float i_EngineEnergy, List<Wheel> i_Wheels, string i_Model, eCarColors? i_Color = null, eCarNumberOfDoors? i_NumberOfDoors = null, bool? i_IsCarryingDangerousMaterials = null, float? i_CargoVolume = null, eMotorLicenseType? i_LicenseType = null, int? i_EngineVolume = null);
+
+    internal abstract class Vehicle(CreateVehicleInput i_CreateVehicleInput) 
     {
         private string Model { get; set; } = string.Empty;
-        private string LicensePlate { get; } = i_Dto.i_LicensePlate;
+        private string LicensePlate { get; } = i_CreateVehicleInput.i_LicensePlate;
         private List<Wheel> Wheels { get; set; } = [];
-        private Engine Engine { get; } = i_Dto.i_Engine;
+        private Engine Engine { get; } = i_CreateVehicleInput.i_Engine;
 
         public void InflateWheelsToMax()
         {
@@ -43,10 +45,10 @@ Wheels information:
     
         public bool IsElectricVehicle() => Engine is ElectricEngine;
 
-        public virtual void UpdateVehicleData(float i_EngineEnergy, List<Wheel> i_Wheels, string i_Model, eCarColors? i_Color = null, eCarNumberOfDoors? i_NumberOfDoors = null, bool? i_IsCarryingDangerousMaterials = null, float? i_CargoVolume = null, eMotorLicenseType? i_LicenseType = null, int? i_EngineVolume = null) {
-            Engine.CurrentCapacity = i_EngineEnergy;
-            Wheels = i_Wheels;
-            Model = i_Model;
+        public virtual void UpdateVehicleData(UpdateVehicleInput i_UpdateVehicleInput) {
+            Engine.CurrentCapacity = i_UpdateVehicleInput.i_EngineEnergy;
+            Wheels = i_UpdateVehicleInput.i_Wheels;
+            Model = i_UpdateVehicleInput.i_Model;
         }
     }
 }

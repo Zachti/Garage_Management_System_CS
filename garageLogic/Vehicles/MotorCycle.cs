@@ -14,10 +14,10 @@ Motorcycle's engine cpacity: {2}",
             EngineVolume );
         }
 
-        public override void UpdateVehicleData(float i_EngineEnergy, List<Wheel> i_Wheels, string i_Model, eCarColors? i_Color = null, eCarNumberOfDoors? i_NumberOfDoors = null, bool? i_IsCarryingDangerousMaterials = null, float? i_CargoVolume = null, eMotorLicenseType? i_LicenseType = null, int? i_EngineVolume = null) {
-            base.UpdateVehicleData(i_EngineEnergy, i_Wheels, i_Model, null, null, null, null, null, null);
-            LicenseType = (eMotorLicenseType)i_LicenseType!;
-            EngineVolume = (int)i_EngineVolume!;
+        public override void UpdateVehicleData(UpdateVehicleInput i_UpdateVehicleInput) {
+            base.UpdateVehicleData(i_UpdateVehicleInput);
+            LicenseType = (eMotorLicenseType)i_UpdateVehicleInput.i_LicenseType!;
+            EngineVolume = (int)i_UpdateVehicleInput.i_EngineVolume!;
         }
     }
 }

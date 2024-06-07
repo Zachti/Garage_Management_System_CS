@@ -19,15 +19,6 @@ namespace Garage {
             i_Wheels.Select(wheelPressure =>
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Motorcycle))
             ).ToList();
-    
-        public override sealed void CreateGarageEntry(eSupportVehicles i_VehicleType,Garage i_Garage, string i_LicensePlate) {
-            Engine engine = getEngineData(getEngineType(i_VehicleType));
-            Vehicle motorcycle = CreateVehicleStrategy.CreateVehicle(i_VehicleType, i_LicensePlate, engine);
-            CommonVehicleData commonVehicleData = getMotorCycleData(out float currentEnergy, out eMotorLicenseType motorLicenseType, out int engineVolume);
-            motorcycle.UpdateVehicleData(currentEnergy, commonVehicleData.i_Wheels, commonVehicleData.i_Model, null, null, null, null, motorLicenseType, engineVolume);
-
-            i_Garage.AddVehicle(new AddVehicleInput(motorcycle, commonVehicleData.i_Owner, i_LicensePlate));
-        }
 
         private eMotorLicenseType getMotorLicenseType() =>
             Utilities.EnumMenuToEnumChoice<eMotorLicenseType>("Please enter the motorcycle's license type:");
@@ -37,12 +28,13 @@ namespace Garage {
             return Utilities.GetNumber<int>();
         }
     
-        private CommonVehicleData getMotorCycleData(out float o_CurrentEnergy, out eMotorLicenseType o_motorLicenseType, out int o_EngineVolume) 
+        protected override UpdateVehicleInput getUpdateVehicleInput() 
         {
-            getCurrentEngineEnergy(out o_CurrentEnergy, MaxEnergy);
-            o_motorLicenseType = getMotorLicenseType();
-            o_EngineVolume = getEngineVolume();
-            return getCommonVehicleData();
+            CommonVehicleData commonVehicleData = getCommonVehicleData();
+            getCurrentEngineEnergy(out float currentEnergy , MaxEnergy);
+            eMotorLicenseType motorLicenseType = getMotorLicenseType();
+            int engineVolume = getEngineVolume();
+            return new UpdateVehicleInput(currentEnergy, commonVehicleData.i_Wheels, commonVehicleData.i_Model, null, null, null, null, motorLicenseType, engineVolume);
         }
     }
 }

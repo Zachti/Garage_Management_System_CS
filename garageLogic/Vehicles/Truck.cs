@@ -14,10 +14,10 @@ Truck's cargo volume: {2}",
                 CargoVolume);
         }
 
-        public override void UpdateVehicleData(float i_EngineEnergy, List<Wheel> i_Wheels, string i_Model, eCarColors? i_Color = null, eCarNumberOfDoors? i_NumberOfDoors = null, bool? i_IsCarryingDangerousMaterials = null, float? i_CargoVolume = null, eMotorLicenseType? i_LicenseType = null, int? i_EngineVolume = null) {
-            base.UpdateVehicleData(i_EngineEnergy, i_Wheels, i_Model, (eCarColors)i_Color!, (eCarNumberOfDoors)i_NumberOfDoors!, null, null, null, null);
-            IsCarryingDangerousMaterials = (bool)i_IsCarryingDangerousMaterials!;
-            CargoVolume = (float)i_CargoVolume!;
+        public override void UpdateVehicleData(UpdateVehicleInput i_UpdateVehicleInput) {
+            base.UpdateVehicleData(i_UpdateVehicleInput);
+            IsCarryingDangerousMaterials = (bool)i_UpdateVehicleInput.i_IsCarryingDangerousMaterials!;
+            CargoVolume = (float)i_UpdateVehicleInput.i_CargoVolume!;
         }
     }
 }

@@ -22,27 +22,18 @@ namespace Garage
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Car))
             ).ToList();
 
-        public override void CreateGarageEntry(eSupportVehicles i_VehicleType, Garage i_Garage, string i_LicensePlate) 
-        {
-            Engine engine = getEngineData(getEngineType(i_VehicleType));
-            Vehicle car = CreateVehicleStrategy.CreateVehicle(i_VehicleType, i_LicensePlate, engine);
-            CommonVehicleData commonVehicleData = getCarData(out float currentEnergy, out eCarColors carColor, out eCarNumberOfDoors numberOfDoors);
-            car.UpdateVehicleData(currentEnergy, commonVehicleData.i_Wheels, commonVehicleData.i_Model, carColor, numberOfDoors);
-            i_Garage.AddVehicle(new AddVehicleInput(car, commonVehicleData.i_Owner, i_LicensePlate));
-        }
-
         private eCarColors getCarColor() => Utilities.EnumMenuToEnumChoice<eCarColors>("Please enter the car color from the options below:");
     
         private eCarNumberOfDoors getNumberOfDoors() =>
             Utilities.EnumMenuToEnumChoice<eCarNumberOfDoors>("Please enter the number of doors from the options below:");
         
-        protected CommonVehicleData getCarData(out float o_CurrentEnergy, out eCarColors o_CarColor, out eCarNumberOfDoors o_NumberOfDoors) 
+        protected override UpdateVehicleInput getUpdateVehicleInput() 
         {
-            getCurrentEngineEnergy(out o_CurrentEnergy , MaxEnergy);
-            o_CarColor = getCarColor();
-            o_NumberOfDoors = getNumberOfDoors();
-            return getCommonVehicleData();
+            CommonVehicleData commonVehicleData = getCommonVehicleData();
+            getCurrentEngineEnergy(out float currentEnergy , MaxEnergy);
+            eCarColors carColor = getCarColor();
+            eCarNumberOfDoors numberOfDoors = getNumberOfDoors();
+            return new UpdateVehicleInput(currentEnergy, commonVehicleData.i_Wheels, commonVehicleData.i_Model, carColor, numberOfDoors);
         }
-
     }
 }

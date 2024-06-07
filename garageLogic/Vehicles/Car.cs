@@ -14,10 +14,10 @@ Car's door quantity: {2}",
                 NumberOfDoors);
         }
 
-        public override void UpdateVehicleData(float i_EngineEnergy, List<Wheel> i_Wheels, string i_Model, eCarColors? i_Color = null, eCarNumberOfDoors? i_NumberOfDoors = null, bool? i_IsCarryingDangerousMaterials = null, float? i_CargoVolume = null, eMotorLicenseType? i_LicenseType = null, int? i_EngineVolume = null) {
-            base.UpdateVehicleData(i_EngineEnergy, i_Wheels, i_Model, null, null, null, null, null, null);
-            Color = (eCarColors)i_Color!;
-            NumberOfDoors = (eCarNumberOfDoors)i_NumberOfDoors!;
+        public override void  UpdateVehicleData(UpdateVehicleInput i_UpdateVehicleInput) {
+            base.UpdateVehicleData(i_UpdateVehicleInput);
+            Color = (eCarColors)i_UpdateVehicleInput.i_Color!;
+            NumberOfDoors = (eCarNumberOfDoors)i_UpdateVehicleInput.i_NumberOfDoors!;
         }
     }
 }

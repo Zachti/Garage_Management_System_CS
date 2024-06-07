@@ -2,3 +2,4 @@ obj/
 bin/
 Ex03.GarageLogic.sln
 .vscode/
+.DS_Store
