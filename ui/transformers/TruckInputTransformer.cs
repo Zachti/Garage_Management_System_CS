@@ -1,5 +1,5 @@
 namespace Garage {
-    internal class TruckInputTransformer : CarInputTransformer {
+    internal sealed class TruckInputTransformer : CarInputTransformer {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
         private const float k_MaxFuelAmount = 120f;
 

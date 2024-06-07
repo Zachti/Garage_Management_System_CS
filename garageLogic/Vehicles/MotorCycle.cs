@@ -2,7 +2,7 @@ namespace Garage {
     
     internal record CreateMotorCycleInput(CreateVehicleInput i_CreateVehicleInput, eMotorLicenseType i_LicenseType, int i_EngineVolume);
     
-    internal class MotorCycle(CreateMotorCycleInput i_Dto) : Vehicle(i_Dto.i_CreateVehicleInput) {
+    internal sealed class MotorCycle(CreateMotorCycleInput i_Dto) : Vehicle(i_Dto.i_CreateVehicleInput) {
         private eMotorLicenseType LicenseType { get; } = i_Dto.i_LicenseType;
         private int EngineVolume { get; } = i_Dto.i_EngineVolume;
 

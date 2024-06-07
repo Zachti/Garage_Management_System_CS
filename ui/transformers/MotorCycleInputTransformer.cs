@@ -1,6 +1,6 @@
 namespace Garage {
     
-    internal class MotorcycleInputTransformer: VehicleInputTransformer {
+    internal sealed class MotorcycleInputTransformer: VehicleInputTransformer {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Motorcycle;
         private const float k_MaxFuelAmount = 5.5f;
         private const float k_MaxBatteryTime = 2.5f;

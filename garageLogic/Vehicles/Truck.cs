@@ -2,7 +2,7 @@ namespace Garage {
     
     internal record CreateTruckInput(CreateCarInput i_CreateCarInput, bool i_IsCarryingDangerousMaterials, float i_CargoVolume);
     
-    internal class Truck(CreateTruckInput i_Dto) : Car(i_Dto.i_CreateCarInput) {
+    internal sealed class Truck(CreateTruckInput i_Dto) : Car(i_Dto.i_CreateCarInput) {
         private bool IsCarryingDangerousMaterials { get; } = i_Dto.i_IsCarryingDangerousMaterials;
         private float CargoVolume { get; } = i_Dto.i_CargoVolume;
 
