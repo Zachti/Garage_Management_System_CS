@@ -30,7 +30,7 @@ namespace Garage {
         public void ChangeCarStatus(string i_LicensePlate, eCarStatus i_NewStatus) {
             if (!isVehicleExist(i_LicensePlate)) 
             {
-                throwNotExistException(i_LicensePlate);
+                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
             }
             GarageEntry entry = GarageEntries[i_LicensePlate];
             entry.CheckEqualStatus(i_NewStatus);
@@ -40,7 +40,7 @@ namespace Garage {
         public void InflateWheelsToMax(string i_LicensePlate) {
             if (!isVehicleExist(i_LicensePlate)) 
             {
-                throwNotExistException(i_LicensePlate);
+                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
             }
             GarageEntries[i_LicensePlate].Vehicle.InflateWheelsToMax();
         }
@@ -48,7 +48,7 @@ namespace Garage {
         public void SupplyEnergy(string i_LicensePlate, float i_AmountToAdd, eFuelType? i_FuelType) {
             if (!isVehicleExist(i_LicensePlate)) 
             {
-                throwNotExistException(i_LicensePlate);
+                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
             }
             Vehicle vehicle = GarageEntries[i_LicensePlate].Vehicle;
             validateEngineTypeAndOperationMatch(vehicle, i_FuelType);
@@ -58,14 +58,12 @@ namespace Garage {
         public string GetVehicleInfoByLicensePlate(string i_LicensePlate) {
             if (!isVehicleExist(i_LicensePlate)) 
             {
-                throwNotExistException(i_LicensePlate);
+                throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
             }
             return GarageEntries[i_LicensePlate].ToString();
         }
 
         private bool isVehicleExist(string i_LicensePlate) => GarageEntries.ContainsKey(i_LicensePlate);
-
-        private void throwNotExistException(string i_LicensePlate) => throw new ArgumentException($"Vehicle with Llicense Plate: {i_LicensePlate} , does not exist in the garage");
     
         private void validateEngineTypeAndOperationMatch(Vehicle i_Vehicle, eFuelType? i_FuelType) {
             if (!i_Vehicle.IsElectricVehicle() && i_FuelType == null) 
