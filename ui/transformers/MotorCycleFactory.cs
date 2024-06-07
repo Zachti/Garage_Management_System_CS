@@ -1,9 +1,10 @@
 namespace Garage {
     
-    internal sealed class MotorcycleInputTransformer: VehicleInputTransformer {
+    internal sealed class MotorCycleFactory: VehicleFactory {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Motorcycle;
         private const float k_MaxFuelAmount = 5.5f;
         private const float k_MaxBatteryTime = 2.5f;
+        
         protected override sealed Engine getEngineData(eEngineType i_EngineType) {
             float maxEnergy = getMaxEnergByType(k_MaxFuelAmount, k_MaxBatteryTime, i_EngineType);
             getCurrentEngineEnergy(out float currentEnergy, maxEnergy);
@@ -19,7 +20,7 @@ namespace Garage {
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Motorcycle))
             ).ToList();
     
-        public override sealed VehicleData Transform(eSupportVehicles i_VehicleType) {
+        public override sealed VehicleData CreateVehicle(eSupportVehicles i_VehicleType) {
             BasicVehicleData basicVehicleData = getBasicVehicleData(i_VehicleType);
 
             eMotorLicenseType motorLicenseType = getMotorLicenseType();

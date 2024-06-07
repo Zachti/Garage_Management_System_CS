@@ -2,7 +2,7 @@ using System.Dynamic;
 
 namespace Garage {
     
-    internal abstract class VehicleInputTransformer {
+    internal abstract class VehicleFactory {
         protected abstract eWheelsNumber WheelsNumber { get; }
         
         protected abstract Engine getEngineData(eEngineType i_EngineType);
@@ -20,7 +20,7 @@ namespace Garage {
             return new Owner(customerName, customerPhoneNumber);
         }
     
-        public abstract VehicleData Transform(eSupportVehicles i_VehicleType);
+        public abstract VehicleData CreateVehicle(eSupportVehicles i_VehicleType);
         
         protected BasicVehicleData getBasicVehicleData(eSupportVehicles i_VehicleType) {
             Engine engine = getEngineData(getEngineType(i_VehicleType));

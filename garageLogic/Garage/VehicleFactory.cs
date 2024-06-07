@@ -1,6 +1,6 @@
 namespace Garage {
     
-    internal class VehicleFactory {
+    internal class GarageStrategy {
         public static Vehicle CreateVehicle(eSupportVehicles i_VehicleType ,string i_LicensePlate, string i_Model, List<Wheel> i_Wheels, Engine i_Engine, eMotorLicenseType? i_LicenseType, int? i_EngineVolume, eCarColors? i_Color, eCarNumberOfDoors? i_NumberOfDoors, bool? i_IsCarryingDangerousMaterials, float? i_CargoVolume) {
             return i_VehicleType switch 
             {

@@ -1,6 +1,6 @@
 namespace Garage
 {
-    internal class CarInputTransformer : VehicleInputTransformer
+    internal class CarFactory : VehicleFactory
     {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Car;
         private const float k_MaxFuelAmount = 45f;
@@ -22,7 +22,7 @@ namespace Garage
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Car))
             ).ToList();
 
-        public override VehicleData Transform(eSupportVehicles i_VehicleType) 
+        public override VehicleData CreateVehicle(eSupportVehicles i_VehicleType) 
         {
             
             BasicVehicleData basicVehicleData = getBasicVehicleData(i_VehicleType);

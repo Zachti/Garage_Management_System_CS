@@ -1,5 +1,5 @@
 namespace Garage {
-    internal sealed class TruckInputTransformer : CarInputTransformer {
+    internal sealed class TruckFactory : CarFactory {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
         private const float k_MaxFuelAmount = 120f;
 
@@ -16,9 +16,9 @@ namespace Garage {
                 new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Truck))
             ).ToList();
     
-        public override sealed VehicleData Transform(eSupportVehicles i_VehicleType) 
+        public override sealed VehicleData CreateVehicle(eSupportVehicles i_VehicleType) 
         {
-            VehicleData vehicleData = base.Transform(i_VehicleType);
+            VehicleData vehicleData = base.CreateVehicle(i_VehicleType);
             bool isCarryingDangerousMaterials = IsTruckCarryingDangerousMaterials();
             float cargoVolume = getCargoVolume();
 
