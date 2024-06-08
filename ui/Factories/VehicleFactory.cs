@@ -10,7 +10,7 @@ namespace Garage {
 
         protected abstract List<Wheel> getWheelData(float[] i_WheelsPressure, string i_Manufacturer);
 
-        private static Owner getOwnerDetails()
+        private Owner getOwnerDetails()
         {
             string customerName, customerPhoneNumber;
 

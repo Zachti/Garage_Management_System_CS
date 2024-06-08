@@ -8,7 +8,7 @@ namespace Garage {
                     eSupportVehicles.Car => new CarFactory(),
                     eSupportVehicles.ElectricCar => new ElectricCarFactory(),
                     eSupportVehicles.Truck => new TruckFactory(),
-                _ => throw new ValueOutOfRangeException((float)i_VehicleType, (float)eSupportVehicles.Motorcycle, (float)eSupportVehicles.Truck)
+                    _ => throw new ValueOutOfRangeException((float)i_VehicleType, (float)eSupportVehicles.Motorcycle, (float)eSupportVehicles.Truck)
                 };
         }
 }
