@@ -10,7 +10,7 @@ namespace Garage
     {
         private string Model { get; set; } = string.Empty;
         private string LicensePlate { get; } = i_CreateVehicleInput.i_LicensePlate;
-        private List<Wheel> Wheels { get; set; } = [];
+        private List<Wheel> Wheels { get; } = [];
         private Engine Engine { get; } = i_CreateVehicleInput.i_Engine;
 
         public void InflateWheelsToMax()
@@ -47,7 +47,7 @@ Wheels information:
 
         public virtual void UpdateVehicleData(UpdateVehicleInput i_UpdateVehicleInput) {
             Engine.CurrentCapacity = i_UpdateVehicleInput.i_EngineEnergy;
-            Wheels = i_UpdateVehicleInput.i_Wheels;
+            Wheels.AddRange(i_UpdateVehicleInput.i_Wheels);
             Model = i_UpdateVehicleInput.i_Model;
         }
     }
