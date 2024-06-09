@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 namespace Garage {
     
     internal class Garage {
-        private Dictionary<string, GarageEntry> GarageEntries {get;} = [];
+        private Dictionary<string, GarageEntry> GarageEntries { get; } = [];
 
         public bool TryToMoveVehicleToRepair(string i_LicensePlate) {
             bool isExist = isVehicleExist(i_LicensePlate);
