@@ -3,7 +3,8 @@ using System.Text;
 namespace Garage {
     internal class Utilities {
         
-        public static float[] WheelsPressureToArray(int i_ArrayLength) {
+        public static float[] WheelsPressureToArray(int i_ArrayLength) 
+        {
             string input = GetInputOrEmpty();
             string[] splitInput = input.Split(',');
 
@@ -19,7 +20,6 @@ namespace Garage {
 
             float[] wheelsData = splitInput.Select(float.Parse).ToArray();
             return wheelsData.Length == 1 ? Enumerable.Repeat(wheelsData[0], i_ArrayLength).ToArray() : wheelsData;
-
         }
         
         public static T GetNumber<T>() where T : IConvertible
@@ -44,7 +44,8 @@ namespace Garage {
             return strNumber;
         }
     
-        public static string GetAlphabeticString() {
+        public static string GetAlphabeticString() 
+        {
             string input = GetInputOrEmpty();
 
             if (string.IsNullOrWhiteSpace(input) || !input.All(ch => char.IsLetter(ch) || ch == ' ')) {
@@ -60,7 +61,6 @@ namespace Garage {
     
         public static int GetSingleDigit() 
         {
-
             string input = GetInputOrEmpty();
 
             if (input?.Length != 1)
@@ -88,20 +88,24 @@ namespace Garage {
             Console.WriteLine(menu.ToString());
         }
     
-        public static T EnumMenuToEnumChoice<T>(string i_Message) where T : Enum {
+        public static T EnumMenuToEnumChoice<T>(string i_Message) where T : Enum 
+        {
             EnumToMenu<T>(i_Message);
             return (T)(object)GetSingleDigit();
         }
         
-        public static int EnumMenuToIntChoiceWithValidation<T>(string i_Message, int i_Min, int i_Max) where T : Enum {
+        public static int EnumMenuToIntChoiceWithValidation<T>(string i_Message, int i_Min, int i_Max) where T : Enum 
+        {
             EnumToMenu<T>(i_Message);
             int choice = GetSingleDigit();
             ValidateNumberInRange(choice, i_Min, i_Max);
             return choice;
         }
     
-        public static void ValidateNumberInRange(float i_Number, float i_Min, float i_Max, string? i_Message = null) {
-            if (i_Number < i_Min || i_Number > i_Max) {
+        public static void ValidateNumberInRange(float i_Number, float i_Min, float i_Max, string? i_Message = null) 
+        {
+            if (i_Number < i_Min || i_Number > i_Max) 
+            {
                 throw new ValueOutOfRangeException(i_Number, i_Min, i_Max, i_Message);
             }
         }

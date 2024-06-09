@@ -1,4 +1,5 @@
 namespace Garage {
+    
     internal enum eSupportVehicles {
         Motorcycle = 1,
         ElectricMotorcycle,

@@ -1,5 +1,3 @@
-using System.Xml.Serialization;
-
 namespace Garage {
     
     internal class Garage {

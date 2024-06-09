@@ -1,5 +1,5 @@
-namespace Garage
-{
+namespace Garage {
+
     internal class CarFactory : VehicleFactory
     {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Car;
