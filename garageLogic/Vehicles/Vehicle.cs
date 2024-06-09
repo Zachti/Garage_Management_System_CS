@@ -21,9 +21,7 @@ namespace Garage
             }
         }
     
-        public void SupplyEnergy(eFuelType? i_FuelType, float i_AmountToAdd) {
-            Engine.SupplyEnergy(i_AmountToAdd, i_FuelType);
-        }
+        public void SupplyEnergy(eFuelType? i_FuelType, float i_AmountToAdd) => Engine.SupplyEnergy(i_AmountToAdd, i_FuelType);
 
         public override string ToString() {
             StringBuilder wheelsInfo = new StringBuilder();

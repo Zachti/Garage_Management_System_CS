@@ -59,9 +59,8 @@ namespace Garage {
             getLicensePlate(out string licensePlate);
             if (!Garage.TryToMoveVehicleToRepair(licensePlate)) 
             {
-                Utilities.EnumToMenu<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
-                VehicleFactory factory = getFactory(out eSupportVehicles vehicleType);
-                factory.CreateGarageEntry(vehicleType, Garage, licensePlate);
+                VehicleFactory vehicleFactory = getFactory(out eSupportVehicles vehicleType);
+                vehicleFactory.CreateGarageEntry(vehicleType, Garage, licensePlate);
             }
         }
     
@@ -119,8 +118,8 @@ namespace Garage {
         }
     
         private VehicleFactory getFactory(out eSupportVehicles io_VehicleType) {
-             io_VehicleType = (eSupportVehicles)Utilities.GetSingleDigit();
-             return FactoryStrategy.CreateFactory(io_VehicleType);
+            io_VehicleType = Utilities.EnumMenuToEnumChoice<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
+            return FactoryStrategy.CreateFactory(io_VehicleType);
         }
     
         private void getLicensePlate(out string o_LicensePlate) {
