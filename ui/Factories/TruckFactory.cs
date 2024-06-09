@@ -25,7 +25,7 @@ namespace Garage {
         {
             Console.WriteLine("Please enter the truck's cargo volume:");
             return Utilities.GetNumber<float>();
-    }
+        }
     
         protected override sealed UpdateVehicleInput getUpdateVehicleInput()
         {

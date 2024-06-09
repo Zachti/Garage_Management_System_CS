@@ -2,9 +2,9 @@ namespace Garage {
     
     internal record CreateGarageEntryInput (Vehicle i_Vehicle, Owner i_Owner);
     
-    internal class GarageEntry (CreateGarageEntryInput i_Dto) {
-        public Vehicle Vehicle { get; } = i_Dto.i_Vehicle;
-        public Owner Owner { get; } = i_Dto.i_Owner;
+    internal class GarageEntry (CreateGarageEntryInput i_CreateGarageEntryInput) {
+        public Vehicle Vehicle { get; } = i_CreateGarageEntryInput.i_Vehicle;
+        public Owner Owner { get; } = i_CreateGarageEntryInput.i_Owner;
         public eCarStatus Status { get; set; } = eCarStatus.InRepair;
 
         public void CheckEqualStatus(eCarStatus i_NewStatus)
