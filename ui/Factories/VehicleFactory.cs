@@ -8,7 +8,10 @@ namespace Garage {
         
         protected abstract Engine getEngineData();
 
-        protected abstract List<Wheel> getWheelData(float[] i_WheelsPressure, string i_Manufacturer);
+        private List<Wheel> getWheelData(float[] i_Pressures, string[] i_Manufacturers) =>
+            i_Pressures.Select((wheelPressure , index) =>
+                new Wheel(new CreateWheelInput(i_Manufacturers[index], wheelPressure, (float)eWheelsMaxPressure.Car))
+            ).ToList();
 
         private Owner getOwnerDetails()
         {
@@ -31,7 +34,7 @@ namespace Garage {
         }
         
         protected CommonVehicleData getCommonVehicleData() {
-            List<Wheel> wheels = getWheelData(getWheelsPressure(WheelsNumber), getManufacturer());
+            List<Wheel> wheels = getWheelData(getWheelsPressure(WheelsNumber), getManufacturer(WheelsNumber));
             string model = getModel();
             return new CommonVehicleData(wheels, model);
         }
@@ -41,9 +44,9 @@ namespace Garage {
             return Utilities.WheelsPressureToArray((int)i_WheelsNumber);
         }
     
-        private string getManufacturer() {
-            Console.WriteLine("Please enter the wheels manufacturer");
-            return Utilities.GetAlphabeticString();
+        private string[] getManufacturer(eWheelsNumber i_WheelsNumber) {
+            Console.WriteLine("Please enter the wheels manufacturer, separated by a comma or one manufacturer for all wheels: ");
+            return Utilities.WheelsDataToArray((int)i_WheelsNumber);
         }
     
         private string getModel() {

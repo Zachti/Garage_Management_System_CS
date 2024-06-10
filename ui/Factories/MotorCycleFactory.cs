@@ -6,11 +6,6 @@ namespace Garage {
 
         protected override Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Octan98);
 
-        protected override sealed List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
-            i_Wheels.Select(wheelPressure =>
-                new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Motorcycle))
-            ).ToList();
-
         private eMotorLicenseType getMotorLicenseType() =>
             Utilities.EnumMenuToEnumChoice<eMotorLicenseType>("Please enter the motorcycle's license type:");
 

@@ -3,7 +3,7 @@ using System.Text;
 namespace Garage {
     internal class Utilities {
         
-        public static float[] WheelsPressureToArray(int i_ArrayLength) 
+        public static string[] WheelsDataToArray(int i_ArrayLength) 
         {
             string input = GetInputOrEmpty();
             string[] splitInput = input.Split(',');
@@ -13,13 +13,19 @@ namespace Garage {
                 throw new FormatException($"Input must contain state for {i_ArrayLength} wheels.");
             }
 
-            if (!splitInput.All(str => float.TryParse(str, out _)))
+            return splitInput.Length == 1 ? Enumerable.Repeat(splitInput[0], i_ArrayLength).ToArray() : splitInput;
+        }
+
+        public static float[] WheelsPressureToArray(int i_ArrayLength) 
+        {
+
+            string[] pressures = WheelsDataToArray(i_ArrayLength);
+            if (!pressures.All(str => float.TryParse(str, out _)))
             {
                 throw new FormatException("Input must contain only numeric digits.");
             }
-
-            float[] wheelsData = splitInput.Select(float.Parse).ToArray();
-            return wheelsData.Length == 1 ? Enumerable.Repeat(wheelsData[0], i_ArrayLength).ToArray() : wheelsData;
+            return pressures.Select(float.Parse).ToArray();
+            
         }
         
         public static T GetNumber<T>() where T : IConvertible

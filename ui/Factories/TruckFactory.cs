@@ -6,11 +6,6 @@ namespace Garage {
 
         protected override sealed Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Soler);
 
-        protected override sealed List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
-            i_Wheels.Select(wheelPressure =>
-                new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Truck))
-            ).ToList();
-
         private bool IsTruckCarryingDangerousMaterials()
         {
             Console.WriteLine("Is the truck carrying dangerous materials? (Y/N)");

@@ -7,11 +7,6 @@ namespace Garage {
        
         protected override Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Octan95);
 
-        protected override List<Wheel> getWheelData(float[] i_Wheels, string i_Manufacturer) =>
-            i_Wheels.Select(wheelPressure =>
-                new Wheel(new CreateWheelInput(i_Manufacturer, wheelPressure, (float)eWheelsMaxPressure.Car))
-            ).ToList();
-
         private eCarColors getCarColor() => Utilities.EnumMenuToEnumChoice<eCarColors>("Please enter the car color from the options below:");
     
         private eCarNumberOfDoors getNumberOfDoors() =>
