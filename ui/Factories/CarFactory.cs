@@ -4,6 +4,8 @@ namespace Garage {
     {
         protected override eWheelsNumber WheelsNumber => eWheelsNumber.Car;
         protected override float MaxEnergy => 45f;
+        protected override eWheelsMaxPressure WheelsMaxPressure => eWheelsMaxPressure.Car;
+
        
         protected override Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Octan95);
 

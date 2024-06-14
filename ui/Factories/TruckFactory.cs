@@ -1,8 +1,10 @@
 namespace Garage {
     
     internal sealed class TruckFactory : CarFactory {
-        protected override eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
-        protected override float MaxEnergy => 120f;
+        protected override sealed eWheelsNumber WheelsNumber => eWheelsNumber.Truck;
+        protected override sealed float MaxEnergy => 120f;
+        protected override sealed eWheelsMaxPressure WheelsMaxPressure => eWheelsMaxPressure.Truck;
+
 
         protected override sealed Engine getEngineData() => new FuelEngine(MaxEnergy, eFuelType.Soler);
 

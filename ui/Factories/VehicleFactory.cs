@@ -5,12 +5,15 @@ namespace Garage {
     internal abstract class VehicleFactory {
         protected abstract eWheelsNumber WheelsNumber { get; }
         protected abstract float MaxEnergy { get; }
+        protected abstract eWheelsMaxPressure WheelsMaxPressure { get; }
+
+        
         
         protected abstract Engine getEngineData();
 
         private List<Wheel> getWheelData(float[] i_Pressures, string[] i_Manufacturers) =>
             i_Pressures.Select((wheelPressure , index) =>
-                new Wheel(new CreateWheelInput(i_Manufacturers[index], wheelPressure, (float)eWheelsMaxPressure.Car))
+                new Wheel(new CreateWheelInput(i_Manufacturers[index], wheelPressure, (float)WheelsMaxPressure))
             ).ToList();
 
         private Owner getOwnerDetails()
