@@ -4,17 +4,17 @@ using System.Text;
 namespace Garage {
 internal class Menu : List<Menu.Item> {
     public bool IsUserWantToExit { get; set; } = false;
-    internal class Item(ICommand command)
+    internal class Item(Action command)
         {
-            public ICommand Command { get; } = command;
+            public Action Command { get; } = command;
 
             public virtual void Selected() {
-            Command?.Execute();
+            Command?.Invoke();
         }
     }
 
     public void Start() {
-        Add(new Item(new ActionCommand(close)));
+        Add(new Item(close));
         printWelcomeMessage();
         while (!IsUserWantToExit) 
             {

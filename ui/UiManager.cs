@@ -10,13 +10,13 @@ namespace Garage {
             Garage = i_Garage;
             Menu =
             [
-                new Menu.Item(new ActionCommand(handleAddVehicle)),
-                new Menu.Item(new ActionCommand(handlePrintLicensePlatesOrderByFilter)),
-                new Menu.Item(new ActionCommand(handleUpdateVechileState)),
-                new Menu.Item(new ActionCommand(handleInflateAllWheelsToMax)),
-                new Menu.Item(new ActionCommand(handleRefuelVehicle)),
-                new Menu.Item(new ActionCommand(handleChargeVehicle)),
-                new Menu.Item(new ActionCommand(handleDisplayFullVehicleDetails)),
+                new Menu.Item(handleAddVehicle),
+                new Menu.Item(handlePrintLicensePlatesOrderByFilter),
+                new Menu.Item(handleUpdateVechileState),
+                new Menu.Item(handleInflateAllWheelsToMax),
+                new Menu.Item(handleRefuelVehicle),
+                new Menu.Item(handleChargeVehicle),
+                new Menu.Item(handleDisplayFullVehicleDetails),
             ];
         }
 
