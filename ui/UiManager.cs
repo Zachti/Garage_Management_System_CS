@@ -2,60 +2,25 @@ using System.Text;
 
 namespace Garage {
 
-    internal class UIManager(Garage i_Garage) {
-        private Garage Garage { get; } = i_Garage;
-        private bool IsUserWantToExit { get; set; }
+    internal class UIManager {
+        private Garage Garage { get; }
+        private Menu Menu { get; }
 
-        public void Start() 
-        {
-            printWelcomeMessage();
-            while (!IsUserWantToExit) 
-            {
-                try {
-                    eMainMenuOptions userChoice = displayMainMenuAndGetChoice();
-                    executeChoice(userChoice);
-                }
-                catch (Exception ex) {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+        public UIManager(Garage i_Garage) {
+            Garage = i_Garage;
+            Menu =
+            [
+                new Menu.Item(new AddVehicleCommand(this)),
+                new Menu.Item(new ShowAllLicensePlatesOrderByFilterCommand(this)),
+                new Menu.Item(new UpdateVechileStateCommand(this)),
+                new Menu.Item(new InflateAllWheelsToMaxCommand(this)),
+                new Menu.Item(new RefuelVehicleCommand(this)),
+                new Menu.Item(new ChargeVehicleCommand(this)),
+                new Menu.Item(new DisplayFullVehicleDetailsCommand(this))
+            ];
         }
 
-        private static eMainMenuOptions displayMainMenuAndGetChoice() =>
-           Utilities.EnumMenuToEnumChoice<eMainMenuOptions>("Please choose which action to make by inserting a chioce number below: ");
-    
-        private void executeChoice(eMainMenuOptions i_UserChoice)
-        {
-            switch (i_UserChoice)
-            {
-                case eMainMenuOptions.Add_vehicle:
-                    handleAddVehicle();
-                    break;
-                case eMainMenuOptions.Show_all_license_plates_in_the_system_filtered_by_status:
-                    handlePrintLicensePlatesOrderByFilter();
-                    break;
-                case eMainMenuOptions.Update_vechile_status:
-                    handleUpdateVechileState();
-                    break;
-                case eMainMenuOptions.Inflate_all_wheels_to_max:
-                    handleInflateAllWheelsToMax();
-                    break;
-                case eMainMenuOptions.Refuel_vehicle:
-                    handleRefuelVehicle();
-                    break;
-                case eMainMenuOptions.Charge_vehicle:
-                    handleChargeVehicle();
-                    break;
-                case eMainMenuOptions.Display_full_vehicle_details:
-                    handleDisplayFullVehicleDetails();
-                    break;
-                case eMainMenuOptions.Exit:
-                    handleGarageExit();
-                    break;
-                default:
-                    throw new ValueOutOfRangeException((float)i_UserChoice, (float)eMainMenuOptions.Add_vehicle, (float)eMainMenuOptions.Exit);
-            }
-        }
+        public void Start() => Menu.Start();
     
         private void handleAddVehicle() 
         {
@@ -121,12 +86,6 @@ namespace Garage {
             Console.WriteLine(vehicleInfo.ToString());
         }
     
-        private void handleGarageExit() 
-        {
-            printExitMessage();
-            IsUserWantToExit = true;
-        }
-    
         private VehicleFactory getFactory(out eSupportVehicles io_VehicleType) 
         {
             io_VehicleType = Utilities.EnumMenuToEnumChoice<eSupportVehicles>("Please enter the Vehicle you want to add from the supported options:");
@@ -154,108 +113,34 @@ namespace Garage {
             o_AmountToAdd = Utilities.GetNumber<float>();
         }
     
-        private void printWelcomeMessage() 
-        {
-
-            StringBuilder opening = new StringBuilder(@"
-██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗ 
-██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗
-██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║
-██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║
-╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝
- ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝ 
-████████╗██╗  ██╗███████╗     ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗     
-╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝     
-   ██║   ███████║█████╗      ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗       
-   ██║   ██╔══██║██╔══╝      ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝       
-   ██║   ██║  ██║███████╗    ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗     
-   ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝     
-███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ ██╗                   
-████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝██╔══██╗██║                   
-██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██████╔╝██║                   
-██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██╔══██╗╚═╝                   
-██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║██╗                   
-╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝                   
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-            ").AppendLine(@"
- .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--. 
-/ .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \
-\ \/\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ \/ /
- \/ /`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'\/ / 
- / /\                                                                                / /\ 
-/ /\ \                                                                              / /\ \
-\ \/ /        ▄████  ▄▄▄       ██▀███   ▄▄▄        ▄████ ▓█████                     \ \/ /
- \/ /        ██▒ ▀█▒▒████▄    ▓██ ▒ ██▒▒████▄     ██▒ ▀█▒▓█   ▀                      \/ / 
- / /\       ▒██░▄▄▄░▒██  ▀█▄  ▓██ ░▄█ ▒▒██  ▀█▄  ▒██░▄▄▄░▒███                        / /\ 
-/ /\ \      ░▓█  ██▓░██▄▄▄▄██ ▒██▀▀█▄  ░██▄▄▄▄██ ░▓█  ██▓▒▓█  ▄                     / /\ \
-\ \/ /      ░▒▓███▀▒ ▓█   ▓██▒░██▓ ▒██▒ ▓█   ▓██▒░▒▓███▀▒░▒████▒                    \ \/ /
- \/ /        ░▒   ▒  ▒▒   ▓▒█░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░ ░▒   ▒ ░░ ▒░ ░                     \/ / 
- / /\         ░   ░   ▒   ▒▒ ░  ░▒ ░ ▒░  ▒   ▒▒ ░  ░   ░  ░ ░  ░                     / /\ 
-/ /\ \      ░ ░   ░   ░   ▒     ░░   ░   ░   ▒   ░ ░   ░    ░                       / /\ \
-\ \/ /            ░       ░  ░   ░           ░  ░      ░    ░  ░                    \ \/ /
- \/ /                                                                                \/ / 
- / /\        ███▄ ▄███▓ ▄▄▄       ███▄    █  ▄▄▄        ▄████ ▓█████  ██▀███         / /\ 
-/ /\ \      ▓██▒▀█▀ ██▒▒████▄     ██ ▀█   █ ▒████▄     ██▒ ▀█▒▓█   ▀ ▓██ ▒ ██▒      / /\ \
-\ \/ /      ▓██    ▓██░▒██  ▀█▄  ▓██  ▀█ ██▒▒██  ▀█▄  ▒██░▄▄▄░▒███   ▓██ ░▄█ ▒      \ \/ /
- \/ /       ▒██    ▒██ ░██▄▄▄▄██ ▓██▒  ▐▌██▒░██▄▄▄▄██ ░▓█  ██▓▒▓█  ▄ ▒██▀▀█▄         \/ / 
- / /\       ▒██▒   ░██▒ ▓█   ▓██▒▒██░   ▓██░ ▓█   ▓██▒░▒▓███▀▒░▒████▒░██▓ ▒██▒       / /\ 
-/ /\ \      ░ ▒░   ░  ░ ▒▒   ▓▒█░░ ▒░   ▒ ▒  ▒▒   ▓▒█░ ░▒   ▒ ░░ ▒░ ░░ ▒▓ ░▒▓░      / /\ \
-\ \/ /      ░  ░      ░  ▒   ▒▒ ░░ ░░   ░ ▒░  ▒   ▒▒ ░  ░   ░  ░ ░  ░  ░▒ ░ ▒░      \ \/ /
- \/ /       ░      ░     ░   ▒      ░   ░ ░   ░   ▒   ░ ░   ░    ░     ░░   ░        \/ / 
- / /\              ░         ░  ░         ░       ░  ░      ░    ░  ░   ░            / /\ 
-/ /\ \                                                                              / /\ \
-\ \/ /                                                                              \ \/ /
- \/ /                                                                                \/ / 
- / /\.--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--./ /\ 
-/ /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \
-\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `' /
- `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--' 
-                            
-            ");
-            Console.WriteLine(opening.ToString());
+        private class AddVehicleCommand(UIManager i_Client) : ICommand {
+            public void Execute() => i_Client.handleAddVehicle(); 
         }
     
-        private void printExitMessage() 
-        {
-            StringBuilder exitMessage = new StringBuilder(@"
-   ▄████████  ▄██████▄   ▄██████▄   ▄██████▄    ████████▄  ███   █▄    ▄████████▄                                   
-  ███    ███ ███    ███ ███    ███ ███   ▀███   ███    ███ ███   ██▄   ███    ███                             
-  ███    █▀  ███    ███ ███    ███ ███    ███   ███    ███ ███▄▄▄███   ███    █▀                              
- ▄███        ███    ███ ███    ███ ███    ███  ▄███▄▄▄██▀  ▀▀▀▀▀▀███  ▄███▄▄▄                                 
-▀▀███ ████▄  ███    ███ ███    ███ ███    ███ ▀▀███▀▀▀██▄  ▄██   ███ ▀▀███▀▀▀                                 
-  ███    ███ ███    ███ ███    ███ ███    ███   ███    ██▄ ███   ███   ███    █▄                              
-  ███    ███ ███    ███ ███    ███ ███   ▄███   ███    ███ ███   ███   ███    ███                             
-  ████████▀   ▀██████▀   ▀██████▀  ████████▀  ▄█████████▀   ▀█████▀    ██████████                             
-                                                                                                              
- ▄█     █▄     ▄████████         ▄█    █▄     ▄██████▄     ▄███████▄    ▄████████          ███      ▄██████▄  
-███     ███   ███    ███        ███    ███   ███    ███   ███    ███   ███    ███      ▀█████████▄ ███    ███ 
-███     ███   ███    █▀         ███    ███   ███    ███   ███    ███   ███    █▀          ▀███▀▀██ ███    ███ 
-███     ███  ▄███▄▄▄           ▄███▄▄▄▄███▄▄ ███    ███   ███    ███  ▄███▄▄▄              ███   ▀ ███    ███ 
-███     ███ ▀▀███▀▀▀          ▀▀███▀▀▀▀███▀  ███    ███ ▀█████████▀  ▀▀███▀▀▀              ███     ███    ███ 
-███     ███   ███    █▄         ███    ███   ███    ███   ███          ███    █▄           ███     ███    ███ 
-███ ▄█▄ ███   ███    ███        ███    ███   ███    ███   ███          ███    ███          ███     ███    ███ 
- ▀███▀███▀    ██████████        ███    █▀     ▀██████▀   ▄████▀        ██████████         ▄████▀    ▀██████▀  
-                                                                                                              
-   ▄████████    ▄████████    ▄████████      ▄██   ▄    ▄██████▄  ███    █▄                                    
-  ███    ███   ███    ███   ███    ███      ███   ██▄ ███    ███ ███    ███                                   
-  ███    █▀    ███    █▀    ███    █▀       ███▄▄▄███ ███    ███ ███    ███                                   
-  ███         ▄███▄▄▄      ▄███▄▄▄          ▀▀▀▀▀▀███ ███    ███ ███    ███                                   
-▀███████████ ▀▀███▀▀▀     ▀▀███▀▀▀          ▄██   ███ ███    ███ ███    ███                                   
-         ███   ███    █▄    ███    █▄       ███   ███ ███    ███ ███    ███                                   
-   ▄█    ███   ███    ███   ███    ███      ███   ███ ███    ███ ███    ███                                   
- ▄████████▀    ██████████   ██████████       ▀█████▀   ▀██████▀  ████████▀                                    
-                                                                                                              
-   ▄████████    ▄██████▄     ▄████████  ▄█  ███▄▄▄▄           ▄████████  ▄██████▄   ▄██████▄  ███▄▄▄▄         
-  ███    ███   ███    ███   ███    ███ ███  ███▀▀▀██▄        ███    ███ ███    ███ ███    ███ ███▀▀▀██▄       
-  ███    ███   ███    █▀    ███    ███ ███▌ ███   ███        ███    █▀  ███    ███ ███    ███ ███   ███       
-  ███    ███  ▄███          ███    ███ ███▌ ███   ███        ███        ███    ███ ███    ███ ███   ███       
-▀███████████ ▀▀███ ████▄  ▀███████████ ███▌ ███   ███      ▀███████████ ███    ███ ███    ███ ███   ███       
-  ███    ███   ███    ███   ███    ███ ███  ███   ███               ███ ███    ███ ███    ███ ███   ███       
-  ███    ███   ███    ███   ███    ███ ███  ███   ███         ▄█    ███ ███    ███ ███    ███ ███   ███       
-  ███    █▀    ████████▀    ███    █▀  █▀    ▀█   █▀        ▄████████▀   ▀██████▀   ▀██████▀   ▀█   █▀        
-   
-   "); 
-            Console.WriteLine(exitMessage.ToString());                                                                                                          
+        private class ShowAllLicensePlatesOrderByFilterCommand(UIManager i_Client) : ICommand {
+            public void Execute() => i_Client.handlePrintLicensePlatesOrderByFilter(); 
+        }
+
+        private class UpdateVechileStateCommand(UIManager i_Client) : ICommand {
+            public void Execute() => i_Client.handleUpdateVechileState(); 
+        }
+
+        private class InflateAllWheelsToMaxCommand(UIManager i_Client) : ICommand {
+            public void Execute() => i_Client.handleInflateAllWheelsToMax(); 
+        }
+
+        private class RefuelVehicleCommand(UIManager i_Client) : ICommand {
+            public void Execute() => i_Client.handleRefuelVehicle(); 
+        }
+
+        private class ChargeVehicleCommand(UIManager i_Client) : ICommand {
+            public void Execute() => i_Client.handleChargeVehicle(); 
+        }
+
+        private class DisplayFullVehicleDetailsCommand(UIManager i_Client) : ICommand {
+            private UIManager Client { get; } = i_Client;
+
+            public void Execute() => Client.handleDisplayFullVehicleDetails(); 
         }
     }
 }
