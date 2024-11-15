@@ -14,7 +14,7 @@ internal class Menu : List<Menu.Item> {
     }
 
     public void Start() {
-        Add(new Item(new ExitCommand(this)));
+        Add(new Item(new ActionCommand(close)));
         printWelcomeMessage();
         while (!IsUserWantToExit) 
             {
@@ -144,11 +144,5 @@ internal class Menu : List<Menu.Item> {
    "); 
             Console.WriteLine(exitMessage.ToString());                                                                                                          
         }
-
-    private class ExitCommand(Menu i_Menu) : ICommand {
-            private Menu Menu { get; } = i_Menu;
-
-            public void Execute() { Menu?.close(); }
-    }
 }
 }

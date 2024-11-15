@@ -10,13 +10,13 @@ namespace Garage {
             Garage = i_Garage;
             Menu =
             [
-                new Menu.Item(new AddVehicleCommand(this)),
-                new Menu.Item(new ShowAllLicensePlatesOrderByFilterCommand(this)),
-                new Menu.Item(new UpdateVechileStateCommand(this)),
-                new Menu.Item(new InflateAllWheelsToMaxCommand(this)),
-                new Menu.Item(new RefuelVehicleCommand(this)),
-                new Menu.Item(new ChargeVehicleCommand(this)),
-                new Menu.Item(new DisplayFullVehicleDetailsCommand(this))
+                new Menu.Item(new ActionCommand(handleAddVehicle)),
+                new Menu.Item(new ActionCommand(handlePrintLicensePlatesOrderByFilter)),
+                new Menu.Item(new ActionCommand(handleUpdateVechileState)),
+                new Menu.Item(new ActionCommand(handleInflateAllWheelsToMax)),
+                new Menu.Item(new ActionCommand(handleRefuelVehicle)),
+                new Menu.Item(new ActionCommand(handleChargeVehicle)),
+                new Menu.Item(new ActionCommand(handleDisplayFullVehicleDetails)),
             ];
         }
 
@@ -111,36 +111,6 @@ namespace Garage {
         {
             Console.WriteLine("Please enter the amount of fuel you want to add:");
             o_AmountToAdd = Utilities.GetNumber<float>();
-        }
-    
-        private class AddVehicleCommand(UIManager i_Client) : ICommand {
-            public void Execute() => i_Client.handleAddVehicle(); 
-        }
-    
-        private class ShowAllLicensePlatesOrderByFilterCommand(UIManager i_Client) : ICommand {
-            public void Execute() => i_Client.handlePrintLicensePlatesOrderByFilter(); 
-        }
-
-        private class UpdateVechileStateCommand(UIManager i_Client) : ICommand {
-            public void Execute() => i_Client.handleUpdateVechileState(); 
-        }
-
-        private class InflateAllWheelsToMaxCommand(UIManager i_Client) : ICommand {
-            public void Execute() => i_Client.handleInflateAllWheelsToMax(); 
-        }
-
-        private class RefuelVehicleCommand(UIManager i_Client) : ICommand {
-            public void Execute() => i_Client.handleRefuelVehicle(); 
-        }
-
-        private class ChargeVehicleCommand(UIManager i_Client) : ICommand {
-            public void Execute() => i_Client.handleChargeVehicle(); 
-        }
-
-        private class DisplayFullVehicleDetailsCommand(UIManager i_Client) : ICommand {
-            private UIManager Client { get; } = i_Client;
-
-            public void Execute() => Client.handleDisplayFullVehicleDetails(); 
         }
     }
 }
