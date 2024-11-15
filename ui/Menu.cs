@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Text;
 
 namespace Garage {
@@ -13,8 +12,14 @@ internal class Menu : List<Menu.Item> {
         }
     }
 
-    public void Start() {
+    public Menu(List<Action> i_MenuItems) {
+        foreach (Action item in i_MenuItems) {
+            Add(new Item(item));
+        }
         Add(new Item(close));
+    }
+    
+    public void Start() {
         printWelcomeMessage();
         while (!IsUserWantToExit) 
             {
@@ -29,9 +34,9 @@ internal class Menu : List<Menu.Item> {
     }
 
     private void executeChoice(eMainMenuOptions choice) {
-            int choiceIndex = (int)choice - 1;
-            Utilities.ValidateNumberInRange(choiceIndex, 0, Count - 1, "Invalid choice number.");
-            this[choiceIndex].Selected();
+        int choiceIndex = (int)choice - 1;
+        Utilities.ValidateNumberInRange(choiceIndex, 0, Count - 1, "Invalid choice number.");
+        this[choiceIndex - 1].Selected();
 }
 
     private eMainMenuOptions showMenu() => Utilities.EnumMenuToEnumChoice<eMainMenuOptions>("Please choose which action to make by inserting a chioce number below: ");

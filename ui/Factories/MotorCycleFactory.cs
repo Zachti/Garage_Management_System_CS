@@ -2,7 +2,7 @@ namespace Garage {
     
     internal class MotorCycleFactory: VehicleFactory {
         protected override sealed eWheelsNumber WheelsNumber => eWheelsNumber.Motorcycle;
-        protected override sealed float MaxEnergy => 5.5f;
+        protected override float MaxEnergy => 5.5f;
         protected override sealed eWheelsMaxPressure WheelsMaxPressure => eWheelsMaxPressure.Motorcycle;
 
 

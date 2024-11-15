@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text;
 
 namespace Garage {
@@ -8,20 +9,12 @@ namespace Garage {
 
         public UIManager(Garage i_Garage) {
             Garage = i_Garage;
-            Menu =
-            [
-                new Menu.Item(handleAddVehicle),
-                new Menu.Item(handlePrintLicensePlatesOrderByFilter),
-                new Menu.Item(handleUpdateVechileState),
-                new Menu.Item(handleInflateAllWheelsToMax),
-                new Menu.Item(handleRefuelVehicle),
-                new Menu.Item(handleChargeVehicle),
-                new Menu.Item(handleDisplayFullVehicleDetails),
-            ];
+            Menu = new Menu(generateMenuCommands());
         }
-
+    
         public void Start() => Menu.Start();
     
+        [MenuCommand]
         private void handleAddVehicle() 
         {
             getLicensePlate(out string licensePlate);
@@ -32,6 +25,7 @@ namespace Garage {
             }
         }
     
+        [MenuCommand]
         private void handlePrintLicensePlatesOrderByFilter() 
         {
             VehicleFilter? filter = getVehicleFilterOrNull();
@@ -51,6 +45,7 @@ namespace Garage {
             Console.WriteLine(output.ToString());
         }
 
+        [MenuCommand]
         private void handleUpdateVechileState() 
         {
             getLicensePlate(out string licensePlate);
@@ -58,12 +53,14 @@ namespace Garage {
             Garage.ChangeCarStatus(licensePlate, (eCarStatus)choice);
         }
     
+        [MenuCommand]
         private void handleInflateAllWheelsToMax() 
         {
             getLicensePlate(out string licensePlate);
             Garage.InflateWheelsToMax(licensePlate);
         }
     
+        [MenuCommand]
         private void handleRefuelVehicle() 
         {
             getLicensePlate(out string licensePlate);
@@ -71,7 +68,8 @@ namespace Garage {
             eFuelType fuelType = getFuelType();
             Garage.SupplyEnergy(licensePlate, amountToAdd, fuelType);
         }
-
+        
+        [MenuCommand]
         private void handleChargeVehicle() 
         {
             getLicensePlate(out string licensePlate);
@@ -79,6 +77,7 @@ namespace Garage {
             Garage.SupplyEnergy(licensePlate, amountToAdd, null);
         }
     
+        [MenuCommand]
         private void handleDisplayFullVehicleDetails() 
         {
             getLicensePlate(out string licensePlate);
@@ -112,5 +111,18 @@ namespace Garage {
             Console.WriteLine("Please enter the amount of fuel you want to add:");
             o_AmountToAdd = Utilities.GetNumber<float>();
         }
+    
+        private List<Action> generateMenuCommands() 
+        {
+            List<Action> menuItems = [];
+            foreach (MethodInfo method in GetType().GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)) 
+            {
+                if (method.GetCustomAttribute<MenuCommandAttribute>() != null)
+                {
+                    menuItems.Add((Action)Delegate.CreateDelegate(typeof(Action), this, method));
+                }
+            }
+            return menuItems;
     }
+}
 }
